@@ -6,7 +6,7 @@
   "scripts": {
     "build": "./node_modules/.bin/webpack --progress --stats --config ./webpack/prod.config.js",
     "dev": "node --harmony ./webpack/dev-server.js",
-    "prod": "node --harmony ./server",
+    "prod": "NODE_ENV=production node server/index.js",
     "test": "./node_modules/.bin/karma start --single-run",
     "postinstall": "npm run build"
   },
