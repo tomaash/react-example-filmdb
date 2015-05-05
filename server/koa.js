@@ -70,8 +70,7 @@ else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 }
 
-
-const mongoUrl = '127.0.0.1:27017';
+const mongoUrl = process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || '127.0.0.1:27017/isofilmdb';
 const mongoose = require('mongoose');
 mongoose.connect(mongoUrl);
 
@@ -87,8 +86,8 @@ app.use(koaRouter(app));
 generateApi(app, model, '/api');
 
 app.use(router);
-
-app.listen(config.port);
+var port = process.env.PORT || config.port || 3000;
+app.listen(port);
 
 console.log(`Application started on port ${config.port}`);
 if (process.send) {
