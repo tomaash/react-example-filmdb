@@ -34,11 +34,13 @@ class Flux extends Alt {
     this.addStore('cars', CarsStore);
 
     if (process.env.BROWSER) {
-      var origin = window.location.origin.replace('http://', '');
-      this.api = restful(origin)
+      var origin = window.location.origin;
+      var protocol = origin.match(/https?/);
+      var path = origin.replace(/https?:\/\//, '');
+      this.api = restful(path)
       // .header('AuthToken', 'test') // set global header
-      .prefixUrl('api');
-      // .protocol('https')
+      .prefixUrl('api')
+      .protocol(protocol);
       // .port(8080);
     }
   }

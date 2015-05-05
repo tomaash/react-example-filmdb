@@ -1,7 +1,7 @@
 {
-  "name": "isomorphic-flux-boilerplate",
-  "version": "0.2.0",
-  "description": "An ES6 isomorphic Flux/ReactJS boilerplate",
+  "name": "isofilmdb",
+  "version": "0.0.1",
+  "description": "Isomorphic React + Flux film database example",
   "main": "server/index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack --progress --stats --config ./webpack/prod.config.js",
@@ -12,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iam4x/isomorphic-flux-boilerplate.git"
+    "url": "https://github.com/tomaash/isofilmdb.git"
   },
-  "homepage": "https://github.com/iam4x/isomorphic-flux-boilerplate",
-  "bugs": "https://github.com/iam4x/isomorphic-flux-boilerplate/issues",
-  "author": "iam4x",
+  "homepage": "https://github.com/tomaash/isofilmdb",
+  "bugs": "https://github.com/tomaash/isofilmdb/issues",
+  "author": "tomaash",
   "license": "MIT",
   "dependencies": {
     "alt": "^0.16.1",
@@ -119,9 +119,7 @@
     "async",
     "server",
     "generator",
-    "es7",
-    "i18n",
-    "intl"
+    "es7"
   ],
   "keywords": [
     "react",
@@ -146,9 +144,7 @@
     "async",
     "server",
     "generator",
-    "es7",
-    "i18n",
-    "intl"
+    "es7"
   ],
   "engines": {
     "iojs": "^1.7.0"
