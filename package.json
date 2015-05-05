@@ -52,9 +52,7 @@
     "react-intl": "^1.2.0",
     "react-router": "^0.13.2",
     "restful.js": "^0.6.1",
-    "superagent": "^1.1.0"
-  },
-  "devDependencies": {
+    "superagent": "^1.1.0",
     "autoprefixer-loader": "^1.2.0",
     "babel": "^5.1.8",
     "babel-core": "^5.1.8",
