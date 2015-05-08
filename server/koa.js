@@ -74,16 +74,17 @@ const mongoUrl = process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || '127.0.0
 const mongoose = require('mongoose');
 mongoose.connect(mongoUrl);
 
-const schema = new mongoose.Schema({
+const CarSchema = new mongoose.Schema({
   brand: String,
   model: String,
   year: Number
 });
 
-const model = mongoose.model('cars', schema);
+const CarModel = mongoose.model('cars', CarSchema);
+
 app.use(koaRouter(app));
 
-generateApi(app, model, '/api');
+generateApi(app, CarModel, '/api');
 
 app.use(router);
 var port = process.env.PORT || config.port || 3000;
