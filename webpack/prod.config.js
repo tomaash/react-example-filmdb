@@ -17,7 +17,10 @@ require('./utils/clean-dist')();
 module.exports = {
   devtool: 'source-map',
   entry: {
-    app: './app/index.js'
+    app: [
+      './app/index.js',
+      'bootstrap-sass!./app/styles/bootstrap-sass.prod.config.js'
+    ]
   },
   output: {
     path: path.join(__dirname, '../dist'),
@@ -29,7 +32,7 @@ module.exports = {
     preLoaders: [
       {
         test: /\.js$|.jsx$/,
-        exclude: /node_modules/,
+        exclude: /node_modules|styles/,
         loaders: ['eslint', 'jscs']
       }
     ],

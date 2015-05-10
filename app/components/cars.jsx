@@ -6,9 +6,9 @@ import {IntlMixin} from 'react-intl';
 import Formsy from 'formsy-react';
 import MyOwnInput from 'components/shared/my-own-input';
 
-if (process.env.BROWSER) {
-  require('styles/cars.scss');
-}
+// if (process.env.BROWSER) {
+//   require('styles/cars.scss');
+// }
 
 export default React.createClass({
   displayName: 'Cars',
@@ -29,7 +29,6 @@ export default React.createClass({
     return this.carsStore().getState();
   },
   componentWillMount() {
-    console.log(this.props.flux.getActions('cars'));
     return this.carsActions().fetch();
   },
   componentDidMount() {
@@ -57,7 +56,7 @@ export default React.createClass({
   },
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <h1>Cars</h1>
         <Formsy.Form ref="carForm" onSubmit={this.submit}>
           <MyOwnInput name="brand" title="Brand" type="text"/>

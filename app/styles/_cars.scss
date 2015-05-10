@@ -1,0 +1,15 @@
+div.action {
+	min-width: 140px;
+	min-height: 23px;
+	// text-align: right;
+	button {
+		display: inline-block;
+		margin-right: 5px;
+	}
+}
+table.car-table tr td span.action-buttons { display:none;}
+table.car-table tr:hover td span.action-buttons { display:inline-block;}
+
+table.car-table {
+	color: $gray-light;
+}

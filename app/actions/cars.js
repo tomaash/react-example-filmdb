@@ -7,8 +7,13 @@ class CarsActions {
     );
   }
   async fetch() {
-    const response = await this.alt.api.all('cars').getAll();
-    this.actions.fetchSuccess(response().data);
+    try {
+      console.log('will fetch');
+      const response = await this.alt.api.all('cars').getAll();
+      this.actions.fetchSuccess(response().data);
+    } catch (err) {
+      console.log(err);
+    }
   }
   async add(car) {
     this.dispatch(car);

@@ -4,9 +4,9 @@ import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 import {IntlMixin} from 'react-intl';
 
-if (process.env.BROWSER) {
-  require('styles/users.scss');
-}
+// if (process.env.BROWSER) {
+//   require('styles/users.scss');
+// }
 
 export default React.createClass({
   displayName: 'UsersList',
@@ -38,7 +38,7 @@ export default React.createClass({
   renderUsers() {
     return this.state.users.map((user, index) => {
       return (
-        <tr className='user--row' key={index}>
+        <tr className='user-row' key={index}>
           <td>{user.user.email}</td>
           <td className='text-center'>
             <button
@@ -48,7 +48,7 @@ export default React.createClass({
           </td>
           <td className='text-center'>
             <button
-              className='user--remove'
+              className='user-remove'
               onClick={this.removeUser.bind(this, index)}>
               X
             </button>
@@ -61,7 +61,7 @@ export default React.createClass({
     return (
       <div>
         <h1 className='text-center'>{this.getIntlMessage('users.title')}</h1>
-        <table className='app--users'>
+        <table className='app-users'>
           <thead>
             <tr>
               <th>{this.getIntlMessage('users.email')}</th>

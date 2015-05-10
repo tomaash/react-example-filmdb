@@ -5,13 +5,15 @@ import objectAssign from 'react/lib/Object.assign';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 import {RouteHandler} from 'react-router';
 
-import Header from 'components/header';
+// import Header from 'components/header';
+import Navbar from 'components/navbar';
 import Footer from 'components/footer';
 
-if (process.env.BROWSER) {
-  require('../../node_modules/bootstrap/dist/css/bootstrap.css');
-  require('styles/main.scss');
-}
+// if (process.env.BROWSER) {
+// require('../../node_modules/bootstrap/dist/css/bootstrap.css');
+// require('styles/main.scss');
+// require('bootstrap-sass!styles/bootstrap-sass.config.js');
+// }
 
 export default React.createClass({
   displayName: 'App',
@@ -31,11 +33,9 @@ export default React.createClass({
   render() {
     const props: Object = objectAssign(this.state, this.props);
     return (
-      <div>
-        <Header {...props} />
-        <div className='container'>
-          <RouteHandler {...props} />
-        </div>
+      <div className="container-fluid">
+        <Navbar {...props} />
+        <RouteHandler {...props} />
         <Footer />
       </div>
     );

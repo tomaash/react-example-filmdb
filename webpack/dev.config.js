@@ -36,6 +36,7 @@ export default {
       app: [
         `webpack-dev-server/client?http://localhost:${WEBPACK_PORT}`,
         'webpack/hot/only-dev-server',
+        'bootstrap-sass!./app/styles/bootstrap-sass.config.js',
         './app/index.js'
       ]
     },
@@ -50,7 +51,7 @@ export default {
       preLoaders: [
         {
           test: /\.js$|.jsx$/,
-          exclude: /node_modules/,
+          exclude: /node_modules|styles/,
           loaders: ['eslint', 'jscs']
         }
       ],
@@ -76,6 +77,10 @@ export default {
         {
           test: /\.scss$/,
           loader: 'style!css?sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
+        },
+        {
+          test: /\.less$/,
+          loader: 'style!css?sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap'
         },
         { test: /\.css$/,
           loader: 'style-loader!css-loader'

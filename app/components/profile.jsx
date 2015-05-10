@@ -4,9 +4,9 @@ import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 import {capitalize} from 'lodash';
 
-if (process.env.BROWSER) {
-  require('styles/profile.scss');
-}
+// if (process.env.BROWSER) {
+//   require('styles/profile.scss');
+// }
 
 export default React.createClass({
   displayName: 'Profile',
@@ -35,7 +35,7 @@ export default React.createClass({
     if (this.state.user) {
       const user: Object = this.state.user.user;
       return (
-        <div className='app--profile'>
+        <div className='app-profile'>
           <h2>{`${capitalize(user.name.first)} ${capitalize(user.name.last)}`}</h2>
           <img
             src={user.picture.medium}
