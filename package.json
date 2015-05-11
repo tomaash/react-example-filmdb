@@ -88,6 +88,7 @@
     "react-hot-loader": "^1.1.4",
     "react-intl": "^1.2.0",
     "react-router": "^0.13.2",
+    "restful.js": "git://github.com/tomaash/restful.js.git",
     "sass-loader": "^1.0.1",
     "style-loader": "^0.11.0",
     "superagent": "^1.1.0",
