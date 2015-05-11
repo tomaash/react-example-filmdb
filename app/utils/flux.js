@@ -7,11 +7,13 @@ import RequestsActions from 'actions/requests';
 import LocaleActions from 'actions/locale';
 import UsersActions from 'actions/users';
 import CarsActions from 'actions/cars';
+import FilmsActions from 'actions/films';
 
 import RequestsStore from 'stores/requests';
 import LocaleStore from 'stores/locale';
 import UsersStore from 'stores/users';
 import CarsStore from 'stores/cars';
+import FilmsStore from 'stores/films';
 import restful from 'restful.js';
 
 class Flux extends Alt {
@@ -26,23 +28,16 @@ class Flux extends Alt {
     this.addActions('locale', LocaleActions);
     this.addActions('users', UsersActions);
     this.addActions('cars', CarsActions);
+    this.addActions('films', FilmsActions);
 
     // Register Stores
     this.addStore('requests', RequestsStore);
     this.addStore('locale', LocaleStore);
     this.addStore('users', UsersStore);
     this.addStore('cars', CarsStore);
+    this.addStore('films', FilmsStore);
 
-    if (process.env.BROWSER) {
-      var origin = window.location.origin;
-      var protocol = origin.match(/https?/);
-      var path = origin.replace(/https?:\/\//, '');
-      this.api = restful(path)
-      // .header('AuthToken', 'test') // set global header
-      .prefixUrl('api')
-      .protocol(protocol);
-      // .port(8080);
-    }
+    this.api = restful().fullUrl('/api');
   }
 
   resolve(result) {

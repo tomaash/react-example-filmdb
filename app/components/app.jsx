@@ -9,12 +9,6 @@ import {RouteHandler} from 'react-router';
 import Navbar from 'components/navbar';
 import Footer from 'components/footer';
 
-// if (process.env.BROWSER) {
-// require('../../node_modules/bootstrap/dist/css/bootstrap.css');
-// require('styles/main.scss');
-// require('bootstrap-sass!styles/bootstrap-sass.config.js');
-// }
-
 export default React.createClass({
   displayName: 'App',
   mixins: [ListenerMixin],

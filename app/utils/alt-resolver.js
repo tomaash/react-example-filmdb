@@ -40,7 +40,8 @@ export default class AltResolver {
         // // Resolve all promises collected
         // await Promise.all(promises);
 
-        debug('dev')('second render');
+        // debug('dev')('second render');
+
         // Get the new content with promises resolved
         const app: string = React.renderToString(React.createElement(Handler, {flux}));
 

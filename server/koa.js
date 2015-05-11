@@ -15,8 +15,7 @@ import responseTime from 'koa-response-time';
 import router from './router';
 import config from './config/init';
 
-import generateApi from 'koa-mongo-rest';
-import koaRouter from 'koa-router';
+import rest from './rest';
 
 const app = koa();
 const env = process.env.NODE_ENV || 'development';
@@ -70,21 +69,8 @@ else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 }
 
-const mongoUrl = process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || '127.0.0.1:27017/isofilmdb';
-const mongoose = require('mongoose');
-mongoose.connect(mongoUrl);
-
-const CarSchema = new mongoose.Schema({
-  brand: String,
-  model: String,
-  year: Number
-});
-
-const CarModel = mongoose.model('cars', CarSchema);
-
-app.use(koaRouter(app));
-
-generateApi(app, CarModel, '/api');
+// Connect REST API
+rest(app);
 
 app.use(router);
 var port = process.env.PORT || config.port || 3000;

@@ -1,5 +1,6 @@
 'use strict';
-const ID_ATTR = '_id';
+import api from 'utils/api';
+
 class CarsActions {
   constructor() {
     this.generateActions(
@@ -9,10 +10,12 @@ class CarsActions {
   async fetch() {
     try {
       console.log('will fetch');
-      const response = await this.alt.api.all('cars').getAll();
-      this.actions.fetchSuccess(response().data);
+      const response = await api.cars.getAll();
+      if (response) {
+        this.actions.fetchSuccess(response().data);
+      }
     } catch (err) {
-      console.log(err);
+      console.log(err.stack);
     }
   }
   async add(car) {
@@ -21,11 +24,11 @@ class CarsActions {
     this.actions.addSuccess(response().data);
   }
   async update(data, item) {
-    const response = await this.alt.api.all('cars').put(item[ID_ATTR], data);
+    const response = await this.alt.api.all('cars').put(item[api.ID_ATTR], data);
     this.actions.updateSuccess({data: response().data, item: item});
   }
   async delete(car, index) {
-    await this.alt.api.all('cars').delete(car[ID_ATTR]);
+    await this.alt.api.all('cars').delete(car[api.ID_ATTR]);
     this.actions.deleteSuccess(index);
   }
 }

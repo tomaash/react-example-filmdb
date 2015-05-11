@@ -24,6 +24,9 @@ export default React.createClass({
             <li>
               <Link to='cars'>Cars</Link>
             </li>
+            <li>
+              <Link to='films'>Films</Link>
+            </li>
           </ul>
         </div>
       </nav>
