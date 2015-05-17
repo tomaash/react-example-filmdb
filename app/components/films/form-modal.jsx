@@ -39,7 +39,7 @@ const FormModal = React.createClass({
     var send;
     var nameError = 'Must have at least 2 letters';
     var textError = 'Must have at least 10 letters';
-    var yearError = 'Must have 4 numbers';
+    var yearError = 'Must be a year from 20th or 21st century';
     if (this.props.editItem) {
       title = 'Edit film ' + this.props.editItem.name;
       send = 'Update';
@@ -68,7 +68,7 @@ const FormModal = React.createClass({
               name="year"
               title="Year"
               type="text"
-              validations="isNumeric,isLength:4"
+              validations={{matchRegexp: /^(19|20)\d{2}$/}}
               validationError={yearError}/>
             <BootstrapInput
               name="description"
