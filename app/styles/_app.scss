@@ -14,3 +14,11 @@ td.ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.validation-error {
+  display: none;
+}
+.error .validation-error {
+  display: block;
+  color: $state-danger-text;
+}

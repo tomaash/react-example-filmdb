@@ -37,6 +37,9 @@ const FormModal = React.createClass({
   render() {
     var title;
     var send;
+    var nameError = 'Must have at least 2 letters';
+    var textError = 'Must have at least 10 letters';
+    var yearError = 'Must have 4 numbers';
     if (this.props.editItem) {
       title = 'Edit film ' + this.props.editItem.name;
       send = 'Update';
@@ -49,10 +52,30 @@ const FormModal = React.createClass({
       <Modal {...this.props} ref="modalInstance" title={title} animation={false}>
         <div className='modal-body'>
           <Formsy.Form ref="filmForm" onValidSubmit={this.submit}>
-            <BootstrapInput name="name" title="Name" type="text"/>
-            <BootstrapInput name="director" title="Director" type="text"/>
-            <BootstrapInput name="year" title="Year" type="text"/>
-            <BootstrapInput name="description" title="Description" type="textarea"/>
+            <BootstrapInput
+              name="name"
+              title="Name"
+              type="text"
+              validations="minLength:2"
+              validationError={nameError}/>
+            <BootstrapInput
+              name="director"
+              title="Director"
+              type="text"
+              validations="minLength:2"
+              validationError={nameError}/>
+            <BootstrapInput
+              name="year"
+              title="Year"
+              type="text"
+              validations="isNumeric,isLength:4"
+              validationError={yearError}/>
+            <BootstrapInput
+              name="description"
+              title="Description"
+              type="textarea"
+              validations="minLength:10"
+              validationError={textError}/>
           </Formsy.Form>
         </div>
         <div className='modal-footer'>
