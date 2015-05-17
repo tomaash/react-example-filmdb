@@ -35,11 +35,13 @@ const FormModal = React.createClass({
     this.refs.filmForm.submit();
   },
   render() {
-    var title, send;
+    var title;
+    var send;
     if (this.props.editItem) {
       title = 'Edit film ' + this.props.editItem.name;
       send = 'Update';
-    } else {
+    }
+    else {
       title = 'Add new film';
       send = 'Create';
     }
