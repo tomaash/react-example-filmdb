@@ -17,6 +17,7 @@ export default function(app) {
   const FilmSchema = new mongoose.Schema({
     name: String,
     director: String,
+    description: String,
     year: Number,
     createdAt: {
       type: Date,

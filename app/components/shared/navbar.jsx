@@ -14,7 +14,7 @@ export default React.createClass({
           <div className="navbar-header">
           <Link to='app' className="navbar-brand">
               <span className="glyphicon glyphicon-home"></span>
-              &nbsp;FilmDB
+               FilmDB
           </Link>
           </div>
           <ul className="nav navbar-nav">

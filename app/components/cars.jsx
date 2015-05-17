@@ -4,7 +4,7 @@ import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 import {IntlMixin} from 'react-intl';
 import Formsy from 'formsy-react';
-import MyOwnInput from 'components/shared/my-own-input';
+import BootstrapInput from 'components/shared/bootstrap-input';
 
 // if (process.env.BROWSER) {
 //   require('styles/cars.scss');
@@ -59,9 +59,9 @@ export default React.createClass({
       <div className="container-fluid">
         <h1>Cars</h1>
         <Formsy.Form ref="carForm" onSubmit={this.submit}>
-          <MyOwnInput name="brand" title="Brand" type="text"/>
-          <MyOwnInput name="model" title="Model" type="text"/>
-          <MyOwnInput name="year" title="Year" type="text"/>
+          <BootstrapInput name="brand" title="Brand" type="text"/>
+          <BootstrapInput name="model" title="Model" type="text"/>
+          <BootstrapInput name="year" title="Year" type="text"/>
           <button className="btn btn-default" type="submit">{this.state.editItem ? 'Update' : 'Create'}</button>
         </Formsy.Form>
         <br/>

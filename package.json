@@ -84,7 +84,7 @@
     "node-sass": "^3.0.0-beta.7",
     "node-watch": "^0.3.4",
     "react": "^0.13.1",
-    "react-a11y": "git://github.com/iam4x/react-a11y.git#packaged",
+    "react-bootstrap": "^0.22.3",
     "react-hot-loader": "^1.1.4",
     "react-intl": "^1.2.0",
     "react-router": "^0.13.2",

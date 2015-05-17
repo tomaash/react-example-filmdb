@@ -9,9 +9,7 @@ import Flux from 'utils/flux';
 import intlLoader from 'utils/intl-loader';
 
 if (process.env.NODE_ENV === 'development') {
-  // Warns about potential accessibility issues with your React elements
-  require('react-a11y')();
-  require('debug').enable('dev,koa');
+  require('debug').enable('dev, koa');
 }
 
 const boostrap = () => {

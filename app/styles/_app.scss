@@ -2,3 +2,15 @@ body {
   padding-top: 20px;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+table.item-table {
+  tr span.action-buttons { display:none;}
+  tr:hover span.action-buttons { display:inline-block;}
+}
+
+td.ellipsis {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

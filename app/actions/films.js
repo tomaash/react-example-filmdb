@@ -18,6 +18,8 @@ class FilmsActions {
     }
   }
   async add(item) {
+    // api.films.post();
+    console.log(item);
     const response = await api.films.post(item);
     this.dispatch(response().data);
   }

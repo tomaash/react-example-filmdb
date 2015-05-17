@@ -6,8 +6,8 @@ import ListenerMixin from 'alt/mixins/ListenerMixin';
 import {RouteHandler} from 'react-router';
 
 // import Header from 'components/header';
-import Navbar from 'components/navbar';
-import Footer from 'components/footer';
+import Navbar from 'components/shared/navbar';
+import Footer from 'components/shared/footer';
 
 export default React.createClass({
   displayName: 'App',

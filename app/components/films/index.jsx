@@ -2,8 +2,10 @@
 
 import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
-import Formsy from 'formsy-react';
-import BootstrapInput from 'components/shared/my-own-input';
+// import Formsy from 'formsy-react';
+// import BootstrapInput from 'components/shared/bootstrap-input';
+import FormModal from './form-modal';
+import {ModalTrigger, Button} from 'react-bootstrap';
 
 export default React.createClass({
   displayName: 'Films',
@@ -32,33 +34,24 @@ export default React.createClass({
   handleStoreChange() {
     this.setState(this.getInitialState());
   },
-  submit(model) {
-    if (this.state.editItem) {
-      this.filmsActions().update(model, this.state.editItem);
-    }
-    else {
-      this.filmsActions().add(model);
-    }
-    this.refs.filmForm.reset();
-    this.setState({editItem: null});
-  },
   delete(item, index) {
     this.filmsActions().delete(item, index);
   },
   edit(item) {
-    this.refs.filmForm.reset(item);
     this.setState({editItem: item});
+    this.refs.modalTrigger.show();
+  },
+  add() {
+    this.setState({editItem: null});
+    this.refs.modalTrigger.show();
   },
   render() {
     return (
       <div className="container-fluid">
         <h1>Films</h1>
-        <Formsy.Form ref="filmForm" onSubmit={this.submit}>
-          <BootstrapInput name="name" title="Name" type="text"/>
-          <BootstrapInput name="director" title="Director" type="text"/>
-          <BootstrapInput name="year" title="Year" type="text"/>
-          <button className="btn btn-default" type="submit">{this.state.editItem ? 'Update' : 'Create'}</button>
-        </Formsy.Form>
+        <ModalTrigger ref="modalTrigger" modal={<FormModal flux={this.props.flux} editItem={this.state.editItem} />}><span/>
+        </ModalTrigger>
+        <Button bsStyle="primary" bsSize="large" onClick={this.add}>Add new film</Button>
         <br/>
         <table className="table table-striped item-table">
           <thead>
@@ -66,6 +59,7 @@ export default React.createClass({
               <th>Name</th>
               <th>Director</th>
               <th>Year</th>
+              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -75,6 +69,7 @@ export default React.createClass({
               <td>{item.name}</td>
               <td>{item.director}</td>
               <td>{item.year}</td>
+              <td className="ellipsis">{item.description}</td>
               <td>
               <div className="action">
                 <span className="action-buttons">
@@ -92,3 +87,11 @@ export default React.createClass({
     );
   }
 });
+// <Formsy.Form ref="filmForm" onSubmit={this.submit}>
+//   <BootstrapInput name="name" title="Name" type="text"/>
+//   <BootstrapInput name="director" title="Director" type="text"/>
+//   <BootstrapInput name="year" title="Year" type="text"/>
+//   <BootstrapInput name="description" title="Description" type="textarea"/>
+//   <button className="btn btn-default" type="submit">{this.state.editItem ? 'Update' : 'Create'}</button>
+// </Formsy.Form>
+

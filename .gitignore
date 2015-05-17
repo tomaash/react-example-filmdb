@@ -1,4 +1,5 @@
 **/webpack-stats.json
+logs
 coverage
 node_modules
 npm-debug.log
