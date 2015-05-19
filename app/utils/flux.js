@@ -8,13 +8,14 @@ import LocaleActions from 'actions/locale';
 import UsersActions from 'actions/users';
 import CarsActions from 'actions/cars';
 import FilmsActions from 'actions/films';
+import DirectorsActions from 'actions/directors';
 
 import RequestsStore from 'stores/requests';
 import LocaleStore from 'stores/locale';
 import UsersStore from 'stores/users';
 import CarsStore from 'stores/cars';
 import FilmsStore from 'stores/films';
-import restful from 'restful.js';
+import DirectorsStore from 'stores/directors';
 
 class Flux extends Alt {
 
@@ -29,6 +30,7 @@ class Flux extends Alt {
     this.addActions('users', UsersActions);
     this.addActions('cars', CarsActions);
     this.addActions('films', FilmsActions);
+    this.addActions('directors', DirectorsActions);
 
     // Register Stores
     this.addStore('requests', RequestsStore);
@@ -36,8 +38,7 @@ class Flux extends Alt {
     this.addStore('users', UsersStore);
     this.addStore('cars', CarsStore);
     this.addStore('films', FilmsStore);
-
-    this.api = restful().fullUrl('/api');
+    this.addStore('directors', DirectorsStore);
   }
 
   resolve(result) {

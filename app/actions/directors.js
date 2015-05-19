@@ -1,11 +1,11 @@
 'use strict';
 import api from 'utils/api';
 
-class FilmsActions {
+class DirectorsActions {
   async fetch() {
     try {
-      console.log('will fetch films');
-      const response = await api.films.getAll();
+      console.log('will fetch directors');
+      const response = await api.directors.getAll();
       if (response) {
         this.dispatch(response().data);
       }
@@ -15,19 +15,17 @@ class FilmsActions {
     }
   }
   async add(item) {
-    // api.films.post();
-    console.log(item);
-    const response = await api.films.post(item);
+    const response = await api.directors.post(item);
     this.dispatch(response().data);
   }
   async update(data, item) {
-    const response = await api.films.put(item[api.ID_ATTR], data);
+    const response = await api.directors.put(item[api.ID_ATTR], data);
     this.dispatch({data: response().data, item: item});
   }
   async delete(item, index) {
-    await api.films.delete(item[api.ID_ATTR]);
+    await api.directors.delete(item[api.ID_ATTR]);
     this.dispatch(index);
   }
 }
 
-export default FilmsActions;
+export default DirectorsActions;

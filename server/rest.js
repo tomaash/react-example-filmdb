@@ -31,9 +31,23 @@ export default function(app) {
 
   const FilmModel = mongoose.model('films', FilmSchema);
 
+  const DirectorSchema = new mongoose.Schema({
+    name: String,
+    nationality: String,
+    birthday: Date,
+    biography: String,
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  });
+
+  const DirectorModel = mongoose.model('directors', DirectorSchema);
+
   app.use(koaRouter(app));
 
   generateApi(app, CarModel, '/api');
   generateApi(app, FilmModel, '/api');
+  generateApi(app, DirectorModel, '/api');
 }
 

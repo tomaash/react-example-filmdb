@@ -2,11 +2,12 @@
 
 import React from 'react';
 import {Link} from 'react-router';
+import {NavItemLink} from 'react-router-bootstrap';
 
 // import imageResolver from 'utils/image-resolver';
 
 export default React.createClass({
-  displayName: 'Header',
+  displayName: 'Navbar',
   render() {
     return (
       <nav className="navbar navbar-default">
@@ -19,13 +20,16 @@ export default React.createClass({
           </div>
           <ul className="nav navbar-nav">
             <li>
-              <Link to='users'>Users</Link>
+              <NavItemLink to='users'>Users</NavItemLink>
             </li>
             <li>
-              <Link to='cars'>Cars</Link>
+              <NavItemLink to='cars'>Cars</NavItemLink>
             </li>
             <li>
-              <Link to='films'>Films</Link>
+              <NavItemLink to='films'>Films</NavItemLink>
+            </li>
+            <li>
+              <NavItemLink to='directors'>Directors</NavItemLink>
             </li>
           </ul>
         </div>

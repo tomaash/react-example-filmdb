@@ -10,6 +10,7 @@ api.ID_ATTR = '_id';
 api.create = create;
 api.cars = create.all('cars');
 api.films = create.all('films');
+api.directors = create.all('directors');
 
 if (!process.env.BROWSER) {
   api.cars.getAll = noop;
