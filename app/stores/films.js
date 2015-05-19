@@ -4,15 +4,15 @@ import {assign} from 'lodash';
 class FilmsStore {
   constructor() {
     this.bindActions(this.alt.getActions('films'));
-    this.items = [];
+    this.films = [];
   }
 
   onAdd(item) {
-    this.items.push(item);
+    this.films.push(item);
   }
 
-  onFetch(items) {
-    this.items = items;
+  onFetch(films) {
+    this.films = films;
   }
 
   onUpdate(msg) {
@@ -20,7 +20,7 @@ class FilmsStore {
   }
 
   onDelete(index) {
-    this.items.splice(index, 1);
+    this.films.splice(index, 1);
   }
 }
 

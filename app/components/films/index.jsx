@@ -5,9 +5,13 @@ import ListenerMixin from 'alt/mixins/ListenerMixin';
 // import Formsy from 'formsy-react';
 // import BootstrapInput from 'components/shared/bootstrap-input';
 import FormModal from './form-modal';
-import {ModalTrigger, Button} from 'react-bootstrap';
+import {
+  ModalTrigger, Button
+}
+from 'react-bootstrap';
 
-export default React.createClass({
+export
+default React.createClass({
   displayName: 'Films',
   mixins: [ListenerMixin],
   contextTypes: {
@@ -19,17 +23,44 @@ export default React.createClass({
   filmsStore() {
     return this.props.flux.getStore('films');
   },
+  directorsStore() {
+    return this.props.flux.getStore('directors');
+  },
   filmsActions() {
     return this.props.flux.getActions('films');
   },
+  directorsActions() {
+    return this.props.flux.getActions('directors');
+  },
   getInitialState() {
-    return this.filmsStore().getState();
+    var directors = this.directorsStore().getState().directors;
+    var directorsHash = {};
+    if (directors) {
+      directors = directors.map((x) => {
+        directorsHash[x._id] = x;
+        return {
+          label: x.name,
+          value: x._id
+        };
+      });
+    }
+    return {
+      films: this.filmsStore().getState().films,
+      directors: directors,
+      directorsHash: directorsHash
+    };
+  },
+  directorName(id) {
+    const data = this.state.directorsHash[id];
+    return data && data.name;
   },
   componentWillMount() {
-    return this.filmsActions().fetch();
+    this.filmsActions().fetch();
+    this.directorsActions().fetch();
   },
   componentDidMount() {
     this.listenTo(this.filmsStore(), this.handleStoreChange);
+    this.listenTo(this.directorsStore(), this.handleStoreChange);
   },
   handleStoreChange() {
     this.setState(this.getInitialState());
@@ -38,18 +69,22 @@ export default React.createClass({
     this.filmsActions().delete(item, index);
   },
   edit(item) {
-    this.setState({editItem: item});
+    this.setState({
+      editItem: item
+    });
     this.refs.modalTrigger.show();
   },
   add() {
-    this.setState({editItem: null});
+    this.setState({
+      editItem: null
+    });
     this.refs.modalTrigger.show();
   },
   render() {
     return (
       <div className="container-fluid">
         <h1>Films</h1>
-        <ModalTrigger ref="modalTrigger" modal={<FormModal flux={this.props.flux} editItem={this.state.editItem} />}><span/>
+        <ModalTrigger ref="modalTrigger" modal={<FormModal flux={this.props.flux} editItem={this.state.editItem} directors={this.state.directors}/>}><span/>
         </ModalTrigger>
         <Button bsStyle="primary" bsSize="large" onClick={this.add}>Add new film</Button>
         <br/>
@@ -64,10 +99,10 @@ export default React.createClass({
             </tr>
           </thead>
           <tbody>
-            {this.state.items.map((item, index) =>
+            {this.state.films.map((item, index) =>
             <tr key={index}>
               <td>{item.name}</td>
-              <td>{item.director}</td>
+              <td>{this.directorName(item.director)}</td>
               <td>{item.year}</td>
               <td className="ellipsis">{item.description}</td>
               <td>
@@ -87,11 +122,4 @@ export default React.createClass({
     );
   }
 });
-// <Formsy.Form ref="filmForm" onSubmit={this.submit}>
-//   <BootstrapInput name="name" title="Name" type="text"/>
-//   <BootstrapInput name="director" title="Director" type="text"/>
-//   <BootstrapInput name="year" title="Year" type="text"/>
-//   <BootstrapInput name="description" title="Description" type="textarea"/>
-//   <button className="btn btn-default" type="submit">{this.state.editItem ? 'Update' : 'Create'}</button>
-// </Formsy.Form>
 

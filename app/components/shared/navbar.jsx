@@ -20,16 +20,10 @@ export default React.createClass({
           </div>
           <ul className="nav navbar-nav">
             <li>
-              <NavItemLink to='users'>Users</NavItemLink>
-            </li>
-            <li>
-              <NavItemLink to='cars'>Cars</NavItemLink>
+              <NavItemLink to='directors'>Directors</NavItemLink>
             </li>
             <li>
               <NavItemLink to='films'>Films</NavItemLink>
-            </li>
-            <li>
-              <NavItemLink to='directors'>Directors</NavItemLink>
             </li>
           </ul>
         </div>

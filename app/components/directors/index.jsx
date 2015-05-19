@@ -64,7 +64,7 @@ export default React.createClass({
             </tr>
           </thead>
           <tbody>
-            {this.state.items.map((item, index) =>
+            {this.state.directors.map((item, index) =>
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.nationality}</td>

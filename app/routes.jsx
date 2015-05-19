@@ -7,7 +7,7 @@ import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
 
 export default (
   <Route name='app' path='/' handler={require('./components/app')}>
-    <DefaultRoute
+    <Route
       name='users'
       handler={require('./components/users')} />
     <Route
@@ -16,7 +16,7 @@ export default (
     <Route
       name='films'
       handler={require('./components/films')} />
-    <Route
+    <DefaultRoute
       name='directors'
       handler={require('./components/directors')} />
     <Route

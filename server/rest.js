@@ -14,9 +14,25 @@ export default function(app) {
 
   const CarModel = mongoose.model('cars', CarSchema);
 
+  const DirectorSchema = new mongoose.Schema({
+    name: String,
+    nationality: String,
+    birthday: Date,
+    biography: String,
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  });
+
+  const DirectorModel = mongoose.model('directors', DirectorSchema);
+
   const FilmSchema = new mongoose.Schema({
     name: String,
-    director: String,
+    director: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'directors'
+    },
     description: String,
     year: Number,
     createdAt: {
@@ -30,19 +46,6 @@ export default function(app) {
   });
 
   const FilmModel = mongoose.model('films', FilmSchema);
-
-  const DirectorSchema = new mongoose.Schema({
-    name: String,
-    nationality: String,
-    birthday: Date,
-    biography: String,
-    createdAt: {
-      type: Date,
-      default: Date.now
-    }
-  });
-
-  const DirectorModel = mongoose.model('directors', DirectorSchema);
 
   app.use(koaRouter(app));
 

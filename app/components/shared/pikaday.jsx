@@ -1,10 +1,12 @@
 var React = require('react');
 var Pikaday;
+
+// This will be used by Pikaday
+/*eslint no-unused-vars:0*/
 var moment;
 
 if (process.env.BROWSER) {
   moment = require('moment');
-  console.log(moment);
   Pikaday = require('pikaday');
   require('pikaday/css/pikaday.css');
 }

@@ -1,13 +1,19 @@
 import React from 'react';
 import Formsy from 'formsy-react';
 import BootstrapInput from 'components/shared/bootstrap-input';
+import SelectInput from 'components/shared/select-input';
 import {Modal, Button} from 'react-bootstrap';
+
+if (process.env.BROWSER) {
+  require('react-select/dist/default.css');
+}
 
 const FormModal = React.createClass({
   propTypes: {
     onRequestHide: React.PropTypes.func,
     flux: React.PropTypes.object.isRequired,
-    editItem: React.PropTypes.object
+    editItem: React.PropTypes.object,
+    directors: React.PropTypes.array
   },
   componentDidMount() {
     this.refs.filmForm.reset(this.props.editItem);
@@ -34,10 +40,14 @@ const FormModal = React.createClass({
   send() {
     this.refs.filmForm.submit();
   },
+  logChange(val) {
+    console.log('Selected: ' + val);
+  },
   render() {
     var title;
     var send;
     var nameError = 'Must have at least 2 letters';
+    var idError = 'Director must be selected';
     var textError = 'Must have at least 10 letters';
     var yearError = 'Must be a year from 20th or 21st century';
     if (this.props.editItem) {
@@ -58,12 +68,12 @@ const FormModal = React.createClass({
               type="text"
               validations="minLength:2"
               validationError={nameError}/>
-            <BootstrapInput
+            <SelectInput
               name="director"
               title="Director"
-              type="text"
-              validations="minLength:2"
-              validationError={nameError}/>
+              validations="isLength:24"
+              validationError={idError}
+              options={this.props.directors}/>
             <BootstrapInput
               name="year"
               title="Year"

@@ -4,15 +4,15 @@ import {assign} from 'lodash';
 class DirectorsStore {
   constructor() {
     this.bindActions(this.alt.getActions('directors'));
-    this.items = [];
+    this.directors = [];
   }
 
   onAdd(item) {
-    this.items.push(item);
+    this.directors.push(item);
   }
 
-  onFetch(items) {
-    this.items = items;
+  onFetch(directors) {
+    this.directors = directors;
   }
 
   onUpdate(msg) {
@@ -20,7 +20,7 @@ class DirectorsStore {
   }
 
   onDelete(index) {
-    this.items.splice(index, 1);
+    this.directors.splice(index, 1);
   }
 }
 
