@@ -20,15 +20,15 @@ class CarsActions {
   }
   async add(car) {
     this.dispatch(car);
-    const response = await this.alt.api.all('cars').post(car);
+    const response = await api.cars.post(car);
     this.actions.addSuccess(response().data);
   }
   async update(data, item) {
-    const response = await this.alt.api.all('cars').put(item[api.ID_ATTR], data);
+    const response = await api.cars.put(item[api.ID_ATTR], data);
     this.actions.updateSuccess({data: response().data, item: item});
   }
   async delete(car, index) {
-    await this.alt.api.all('cars').delete(car[api.ID_ATTR]);
+    await api.cars.delete(car[api.ID_ATTR]);
     this.actions.deleteSuccess(index);
   }
 }

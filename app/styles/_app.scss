@@ -22,3 +22,11 @@ td.ellipsis {
   display: block;
   color: $state-danger-text;
 }
+.Select .Select-control {
+  padding: 8px 52px 0px 10px;
+  .Select-placeholder {
+    padding: 10px 52px 8px 10px;
+    line-height: 17px;
+    // margin-top: -2px;
+  }
+}

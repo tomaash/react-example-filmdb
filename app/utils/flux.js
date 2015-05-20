@@ -7,15 +7,17 @@ import RequestsActions from 'actions/requests';
 import LocaleActions from 'actions/locale';
 import UsersActions from 'actions/users';
 import CarsActions from 'actions/cars';
-import FilmsActions from 'actions/films';
-import DirectorsActions from 'actions/directors';
+import FilmsActions from 'actions/films-actions';
+import DirectorsActions from 'actions/directors-actions';
+import StatusActions from 'actions/status-actions';
 
 import RequestsStore from 'stores/requests';
 import LocaleStore from 'stores/locale';
 import UsersStore from 'stores/users';
 import CarsStore from 'stores/cars';
-import FilmsStore from 'stores/films';
-import DirectorsStore from 'stores/directors';
+import FilmsStore from 'stores/films-store';
+import DirectorsStore from 'stores/directors-store';
+import StatusStore from 'stores/status-store';
 
 class Flux extends Alt {
 
@@ -31,6 +33,7 @@ class Flux extends Alt {
     this.addActions('cars', CarsActions);
     this.addActions('films', FilmsActions);
     this.addActions('directors', DirectorsActions);
+    this.addActions('status', StatusActions);
 
     // Register Stores
     this.addStore('requests', RequestsStore);
@@ -39,6 +42,7 @@ class Flux extends Alt {
     this.addStore('cars', CarsStore);
     this.addStore('films', FilmsStore);
     this.addStore('directors', DirectorsStore);
+    this.addStore('status', StatusStore);
   }
 
   resolve(result) {

@@ -4,7 +4,7 @@ import {assign} from 'lodash';
 class CarsStore {
   constructor() {
     this.bindActions(this.alt.getActions('cars'));
-    this.cars = ['kukabus'];
+    this.cars = [{brand: 'kukabus'}];
   }
 
   onAdd(car) {

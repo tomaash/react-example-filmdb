@@ -36,7 +36,7 @@ default React.createClass({
     var directors = this.directorsStore().getState().directors;
     var directorsHash = {};
     if (directors) {
-      directors = directors.map((x) => {
+      directors = directors && directors.map((x) => {
         directorsHash[x._id] = x;
         return {
           label: x.name,
@@ -55,8 +55,8 @@ default React.createClass({
     return data && data.name;
   },
   componentWillMount() {
-    this.filmsActions().fetch();
     this.directorsActions().fetch();
+    this.filmsActions().fetch();
   },
   componentDidMount() {
     this.listenTo(this.filmsStore(), this.handleStoreChange);
@@ -99,7 +99,7 @@ default React.createClass({
             </tr>
           </thead>
           <tbody>
-            {this.state.films.map((item, index) =>
+            {this.state.films && this.state.films.map((item, index) =>
             <tr key={index}>
               <td>{item.name}</td>
               <td>{this.directorName(item.director)}</td>

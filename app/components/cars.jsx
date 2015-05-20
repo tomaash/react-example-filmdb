@@ -1,18 +1,19 @@
 'use strict';
 
 import React from 'react';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
-import {IntlMixin} from 'react-intl';
+// import ListenerMixin from 'alt/mixins/ListenerMixin';
+// import {IntlMixin} from 'react-intl';
 import Formsy from 'formsy-react';
 import BootstrapInput from 'components/shared/bootstrap-input';
-
+import AltContainer from 'alt/AltContainer';
+import {Button} from 'react-bootstrap';
 // if (process.env.BROWSER) {
 //   require('styles/cars.scss');
 // }
 
 export default React.createClass({
   displayName: 'Cars',
-  mixins: [ListenerMixin, IntlMixin],
+  // mixins: [ListenerMixin, IntlMixin],
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -26,16 +27,23 @@ export default React.createClass({
     return this.props.flux.getActions('cars');
   },
   getInitialState() {
+    console.log('get init state');
     return this.carsStore().getState();
   },
   componentWillMount() {
     return this.carsActions().fetch();
   },
   componentDidMount() {
-    this.listenTo(this.carsStore(), this.handleStoreChange);
+    this.handleStoreChange();
+    // this.listenTo(this.carsStore(), this.handleStoreChange);
   },
   handleStoreChange() {
     this.setState(this.getInitialState());
+  },
+  foo() {
+    this.carsActions().fetch();
+    console.log('foo');
+    console.log(this.props);
   },
   submit(model) {
     if (this.state.editItem) {
@@ -54,8 +62,24 @@ export default React.createClass({
     this.refs.carForm.reset(item);
     this.setState({editItem: item});
   },
+
+  // var _this = this;
+  // stores={[this.carsStore()]}
+  // inject={{
+  //   cars: function (props) {
+  //     console.log('inject');
+  //     console.log(props);
+  //     var cars = _this.props.flux.getStore('cars').getState().cars;
+  //     console.log(cars);
+  //     return cars;
+  //   }
+  // }}
+
   render() {
+
     return (
+      <AltContainer flux={this.props.flux} store={this.carsStore()}>
+      <Button bsStyle="primary" bsSize="large" onClick={this.foo.bind(this, this.props)}>Foo</Button>
       <div className="container-fluid">
         <h1>Cars</h1>
         <Formsy.Form ref="carForm" onSubmit={this.submit}>
@@ -94,6 +118,7 @@ export default React.createClass({
           </tbody>
         </table>
       </div>
+      </AltContainer>
     );
   }
 });

@@ -13,8 +13,10 @@ const FormModal = React.createClass({
     editItem: React.PropTypes.object
   },
   componentDidMount() {
-    console.log(countries.options);
-    this.props.editItem.birthday = new Date(this.props.editItem.birthday);
+    // Convert birthday to Date object to allow editing
+    if (this.props.editItem) {
+      this.props.editItem.birthday = new Date(this.props.editItem.birthday);
+    }
     this.refs.directorForm.reset(this.props.editItem);
   },
   directorsActions() {
