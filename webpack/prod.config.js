@@ -41,15 +41,24 @@ module.exports = {
         test: /\.json$/,
         loader: 'json'
       },
+      // {
+      //   test: /\.(eot|ttf)$/,
+      //   loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
+      // },
+      // { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&minetype=application/font-woff'
+      // },
+      // {
+      //   test: /\.(jpe?g|png|gif|svg)$/,
+      //   loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
+      // },
       {
-        test: /\.(eot|ttf)$/,
+        // |svg|woff|eot|ttf
+        test: /\.(jpe?g|png|gif)$/,
         loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]'
       },
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&minetype=application/font-woff'
       },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/,
-        loader: 'url?limit=10000&name=[sha512:hash:base64:7].[ext]!image?optimizationLevel=7&progressive&interlaced'
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader'
       },
       {
         test: /\.js$|.jsx$/,
