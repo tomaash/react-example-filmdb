@@ -5,7 +5,6 @@ import {Link} from 'react-router';
 import {NavItemLink} from 'react-router-bootstrap';
 import {Alert, Button} from 'react-bootstrap';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
-import cn from 'classnames';
 
 // import imageResolver from 'utils/image-resolver';
 
@@ -35,6 +34,7 @@ export default React.createClass({
   render() {
     var errorComponent;
     var retryComponent;
+    var busyComponent;
     if (this.state.error) {
       if (this.state.retryData) {
         retryComponent = <Button onClick={this.retry} bsStyle="danger" bsSize="xsmall" className="pull-right">Retry</Button>;
@@ -44,6 +44,10 @@ export default React.createClass({
       <strong>Network Error!</strong>
       {retryComponent}
       </Alert>);
+    }
+    if (this.state.busy) {
+      busyComponent = <div className="busy-indicator pull-right"><i className="fa fa-refresh fa-spin"></i></div>;
+
     }
 
     return (
@@ -63,7 +67,7 @@ export default React.createClass({
                 <NavItemLink to='films'>Films</NavItemLink>
               </li>
             </ul>
-            <div className={cn([{invisible: !this.state.busy}, 'busy-indicator', 'pull-right'])}><i className="fa fa-refresh fa-spin"></i></div>
+            {busyComponent}
           </div>
         </nav>
         {errorComponent}
