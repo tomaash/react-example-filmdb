@@ -3,6 +3,7 @@ import Formsy from 'formsy-react';
 import BootstrapInput from 'components/shared/bootstrap-input';
 import SelectInput from 'components/shared/select-input';
 import {Modal, Button} from 'react-bootstrap';
+import {defer} from 'lodash';
 
 if (process.env.BROWSER) {
   require('react-select/dist/default.css');
@@ -32,7 +33,7 @@ const FormModal = React.createClass({
     // React complains if we update
     // DOM with form validations after close
     // so let's wait one tick
-    setTimeout(this.close, 0);
+    defer(this.close);
   },
   close() {
     this.props.onRequestHide();

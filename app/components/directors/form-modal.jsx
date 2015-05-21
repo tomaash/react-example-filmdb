@@ -5,6 +5,7 @@ import PikadayInput from 'components/shared/pikaday-input';
 import SelectInput from 'components/shared/select-input';
 import {Modal, Button} from 'react-bootstrap';
 import countries from 'utils/countries';
+import {defer} from 'lodash';
 
 const FormModal = React.createClass({
   propTypes: {
@@ -24,7 +25,7 @@ const FormModal = React.createClass({
   },
   submit(model) {
     if (this.props.editItem) {
-      this.directorsActions().update(model, this.props.editItem);
+      this.directorsActions().update(this.props.editItem._id, model);
     }
     else {
       this.directorsActions().add(model);
@@ -33,7 +34,7 @@ const FormModal = React.createClass({
     // React complains if we update
     // DOM with form validations after close
     // so let's wait one tick
-    setTimeout(this.close, 0);
+    defer(this.close);
   },
   close() {
     this.props.onRequestHide();

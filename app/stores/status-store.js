@@ -1,5 +1,6 @@
 'use strict';
 import axios from 'axios';
+// import {defer} from 'lodash';
 
 class StatusStore {
   constructor() {

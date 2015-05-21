@@ -10,12 +10,11 @@ class FilmsActions {
       method: api.films.getAll
     });
   }
-  add(item) {
-    var saveItem = clone(item);
+  add(data) {
     networkAction({
       context: this,
       method: api.films.post,
-      data: saveItem
+      data: clone(data)
     });
   }
   update(id, data) {
@@ -23,7 +22,7 @@ class FilmsActions {
       context: this,
       method: api.films.put,
       id: id,
-      data: data
+      data: clone(data)
     });
   }
   delete(id) {

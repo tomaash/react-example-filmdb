@@ -2,8 +2,6 @@
 
 import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
-// import Formsy from 'formsy-react';
-// import BootstrapInput from 'components/shared/bootstrap-input';
 import FormModal from './form-modal';
 import {
   ModalTrigger, Button

@@ -43,7 +43,8 @@ export default React.createClass({
       {retryComponent}
       </Alert>);
     }
-    if (this.state.busy) {
+    // Prerender busy on server as not to lose markup state on client
+    if (this.state.busy || !process.env.BROWSER) {
       busyComponent = <div className="busy-indicator pull-right"><i className="fa fa-refresh fa-spin"></i></div>;
     }
     return (
@@ -51,9 +52,9 @@ export default React.createClass({
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
-            <Link to='app' className="navbar-brand">
+              <Link to='app' className="navbar-brand">
                 <i className="fa fa-film"></i> FilmDB
-            </Link>
+              </Link>
             </div>
             <ul className="nav navbar-nav">
               <li>
@@ -71,7 +72,3 @@ export default React.createClass({
     );
   }
 });
-
-// <li>
-//   <NavItemLink to='cars'>Cars</NavItemLink>
-// </li>

@@ -33,8 +33,8 @@ export default React.createClass({
   handleStoreChange() {
     this.setState(this.getInitialState());
   },
-  delete(item, index) {
-    this.directorsActions().delete(item, index);
+  delete(item) {
+    this.directorsActions().delete(item._id);
   },
   edit(item) {
     this.setState({editItem: item});
@@ -74,7 +74,7 @@ export default React.createClass({
                 <span className="action-buttons">
                   <button className='btn btn-xs btn-primary'>Show</button>
                   <button onClick={this.edit.bind(this, item)} className='btn btn-xs btn-warning'>Edit</button>
-                  <button onClick={this.delete.bind(this, item, index)} className='btn btn-xs btn-danger'>Delete</button>
+                  <button onClick={this.delete.bind(this, item)} className='btn btn-xs btn-danger'>Delete</button>
                 </span>
               </div>
               </td>

@@ -1,48 +1,36 @@
 'use strict';
 import api from 'utils/api';
 import {clone} from 'lodash';
+import {networkAction} from 'utils/action-utils';
 
 class DirectorsActions {
-  async fetch() {
-    try {
-      this.alt.getActions('status').started();
-      const response = await api.directors.getAll();
-      this.dispatch(response().data);
-      this.alt.getActions('status').done();
-    } catch (err) {
-      this.alt.getActions('status').failed({config: err.config, action: this.actionDetails});
-    }
+  fetch() {
+    networkAction({
+      context: this,
+      method: api.directors.getAll
+    });
   }
-  async add(item) {
-    var saveItem = clone(item);
-    try {
-      this.alt.getActions('status').started();
-      const response = await api.directors.post(saveItem);
-      this.dispatch(response().data);
-      this.alt.getActions('status').done();
-    } catch (err) {
-      this.alt.getActions('status').failed({config: err.config, action: this.actionDetails});
-    }
+  add(data) {
+    networkAction({
+      context: this,
+      method: api.directors.post,
+      data: clone(data)
+    });
   }
-  async update(data, item) {
-    try {
-      this.alt.getActions('status').started();
-      const response = await api.directors.put(item._id, data);
-      this.dispatch({data: response().data, item: item});
-      this.alt.getActions('status').done();
-    } catch (err) {
-      this.alt.getActions('status').failed();
-    }
+  update(id, data) {
+    networkAction({
+      context: this,
+      method: api.directors.put,
+      id: id,
+      data: clone(data)
+    });
   }
-  async delete(item, index) {
-    try {
-      this.alt.getActions('status').started();
-      await api.directors.delete(item._id);
-      this.dispatch(index);
-      this.alt.getActions('status').done();
-    } catch (err) {
-      this.alt.getActions('status').failed();
-    }
+  delete(id) {
+    networkAction({
+      context: this,
+      method: api.directors.delete,
+      id: id
+    });
   }
 }
 
