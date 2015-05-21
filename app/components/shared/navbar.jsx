@@ -18,7 +18,6 @@ export default React.createClass({
     return this.props.flux.getStore('status');
   },
   getInitialState() {
-    console.log(this.statusStore().getState());
     return this.statusStore().getState();
   },
   componentDidMount() {
@@ -28,7 +27,6 @@ export default React.createClass({
     this.setState(this.getInitialState());
   },
   retry() {
-    console.log('retry');
     this.props.flux.getActions('status').retry();
   },
   render() {
@@ -47,9 +45,7 @@ export default React.createClass({
     }
     if (this.state.busy) {
       busyComponent = <div className="busy-indicator pull-right"><i className="fa fa-refresh fa-spin"></i></div>;
-
     }
-
     return (
       <div>
         <nav className="navbar navbar-default">

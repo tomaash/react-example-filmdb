@@ -23,7 +23,7 @@ const FormModal = React.createClass({
   },
   submit(model) {
     if (this.props.editItem) {
-      this.filmsActions().update(model, this.props.editItem);
+      this.filmsActions().update(this.props.editItem._id, model);
     }
     else {
       this.filmsActions().add(model);

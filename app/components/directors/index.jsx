@@ -2,8 +2,6 @@
 
 import React from 'react';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
-// import Formsy from 'formsy-react';
-// import BootstrapInput from 'components/shared/bootstrap-input';
 import FormModal from './form-modal';
 import {ModalTrigger, Button} from 'react-bootstrap';
 import moment from 'moment';
@@ -61,6 +59,7 @@ export default React.createClass({
               <th>Nationality</th>
               <th>Birthday</th>
               <th>Biography</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -87,11 +86,4 @@ export default React.createClass({
     );
   }
 });
-// <Formsy.Form ref="filmForm" onSubmit={this.submit}>
-//   <BootstrapInput name="name" title="Name" type="text"/>
-//   <BootstrapInput name="director" title="Director" type="text"/>
-//   <BootstrapInput name="year" title="Year" type="text"/>
-//   <BootstrapInput name="description" title="Description" type="textarea"/>
-//   <button className="btn btn-default" type="submit">{this.state.editItem ? 'Update' : 'Create'}</button>
-// </Formsy.Form>
 

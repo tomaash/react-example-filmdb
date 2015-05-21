@@ -1,26 +1,23 @@
 'use strict';
 import {assign} from 'lodash';
+import {findItemById, findIndexById} from 'utils/store-utils';
 
 class FilmsStore {
   constructor() {
     this.bindActions(this.alt.getActions('films'));
     this.films = [];
   }
-
   onAdd(item) {
     this.films.push(item);
   }
-
   onFetch(films) {
     this.films = films;
   }
-
-  onUpdate(msg) {
-    assign(msg.item, msg.data);
+  onUpdate(item) {
+    assign(findItemById(this.films, item._id), item);
   }
-
-  onDelete(index) {
-    this.films.splice(index, 1);
+  onDelete(item) {
+    this.films.splice(findIndexById(this.films, item._id), 1);
   }
 }
 

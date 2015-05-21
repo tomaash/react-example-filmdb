@@ -1,48 +1,37 @@
 'use strict';
 import api from 'utils/api';
 import {clone} from 'lodash';
+import {networkAction} from 'utils/action-utils';
 
 class FilmsActions {
-  async fetch() {
-    try {
-      this.alt.getActions('status').started();
-      const response = await api.films.getAll();
-      this.dispatch(response().data);
-      this.alt.getActions('status').done();
-    } catch (err) {
-      this.alt.getActions('status').failed({config: err.config, action: this.actionDetails});
-    }
+  fetch() {
+    networkAction({
+      context: this,
+      method: api.films.getAll
+    });
   }
-  async add(item) {
+  add(item) {
     var saveItem = clone(item);
-    try {
-      this.alt.getActions('status').started();
-      const response = await api.films.post(saveItem);
-      this.dispatch(response().data);
-      this.alt.getActions('status').done();
-    } catch (err) {
-      this.alt.getActions('status').failed({config: err.config, action: this.actionDetails});
-    }
+    networkAction({
+      context: this,
+      method: api.films.post,
+      data: saveItem
+    });
   }
-  async update(data, item) {
-    try {
-      this.alt.getActions('status').started();
-      const response = await api.films.put(item._id, data);
-      this.dispatch({data: response().data, item: item});
-      this.alt.getActions('status').done();
-    } catch (err) {
-      this.alt.getActions('status').failed();
-    }
+  update(id, data) {
+    networkAction({
+      context: this,
+      method: api.films.put,
+      id: id,
+      data: data
+    });
   }
-  async delete(item, index) {
-    try {
-      this.alt.getActions('status').started();
-      await api.films.delete(item._id);
-      this.dispatch(index);
-      this.alt.getActions('status').done();
-    } catch (err) {
-      this.alt.getActions('status').failed();
-    }
+  delete(id) {
+    networkAction({
+      context: this,
+      method: api.films.delete,
+      id: id
+    });
   }
 }
 
