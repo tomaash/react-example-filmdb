@@ -58,6 +58,9 @@ export default React.createClass({
             </div>
             <ul className="nav navbar-nav">
               <li>
+                <NavItemLink to='cars'>Cars</NavItemLink>
+              </li>
+              <li>
                 <NavItemLink to='directors'>Directors</NavItemLink>
               </li>
               <li>
@@ -72,3 +75,4 @@ export default React.createClass({
     );
   }
 });
+

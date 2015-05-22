@@ -24,11 +24,11 @@ class CarsActions {
     this.actions.addSuccess(response().data);
   }
   async update(data, item) {
-    const response = await api.cars.put(item[api.ID_ATTR], data);
+    const response = await api.cars.put(item._id, data);
     this.actions.updateSuccess({data: response().data, item: item});
   }
   async delete(car, index) {
-    await api.cars.delete(car[api.ID_ATTR]);
+    await api.cars.delete(car._id);
     this.actions.deleteSuccess(index);
   }
 }

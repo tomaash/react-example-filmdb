@@ -7,6 +7,9 @@ import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
 
 export default (
   <Route name='app' path='/' handler={require('./components/app')}>
+    <DefaultRoute
+      name='directors'
+      handler={require('./components/directors')} />
     <Route
       name='users'
       handler={require('./components/users')} />
@@ -16,9 +19,6 @@ export default (
     <Route
       name='films'
       handler={require('./components/films')} />
-    <DefaultRoute
-      name='directors'
-      handler={require('./components/directors')} />
     <Route
       name='profile'
       path='profile/:seed'
@@ -26,3 +26,4 @@ export default (
     <NotFoundRoute handler={require('./pages/not-found')} />
   </Route>
 );
+

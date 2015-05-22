@@ -48,13 +48,13 @@ export default {
       publicPath: PUBLIC_PATH
     },
     module: {
-      preLoaders: [
-        {
-          test: /\.js$|.jsx$/,
-          exclude: /node_modules|styles/,
-          loaders: ['eslint', 'jscs']
-        }
-      ],
+      // preLoaders: [
+      //   {
+      //     test: /\.js$|.jsx$/,
+      //     exclude: /node_modules|styles/,
+      //     loaders: ['eslint', 'jscs']
+      //   }
+      // ],
       loaders: [
         {
           test: /\.json$/,
@@ -72,7 +72,8 @@ export default {
         {
           test: /\.js$|.jsx$/,
           exclude: /node_modules/,
-          loaders: ['react-hot', 'babel', 'flowcheck']
+          loaders: ['react-hot', 'babel']
+          // , 'flowcheck'
         },
         {
           test: /\.scss$/,

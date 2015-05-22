@@ -7,41 +7,39 @@ import {Modal, Button} from 'react-bootstrap';
 import countries from 'utils/countries';
 import {defer} from 'lodash';
 
-const FormModal = React.createClass({
-  propTypes: {
+export default class DirectorsForm extends React.Component {
+  static propTypes = {
     onRequestHide: React.PropTypes.func,
     flux: React.PropTypes.object.isRequired,
-    editItem: React.PropTypes.object
-  },
+    editItem: React.PropTypes.object,
+    DirectorsActions: React.PropTypes.object
+  }
   componentDidMount() {
     // Convert birthday to Date object to allow editing
     if (this.props.editItem) {
       this.props.editItem.birthday = new Date(this.props.editItem.birthday);
     }
     this.refs.directorForm.reset(this.props.editItem);
-  },
-  directorsActions() {
-    return this.props.flux.getActions('directors');
-  },
+  }
   submit(model) {
     if (this.props.editItem) {
-      this.directorsActions().update(this.props.editItem._id, model);
+      this.props.DirectorsActions.update(this.props.editItem._id, model);
     }
     else {
-      this.directorsActions().add(model);
+      this.props.DirectorsActions.add(model);
     }
     this.refs.directorForm.reset();
     // React complains if we update
     // DOM with form validations after close
     // so let's wait one tick
-    defer(this.close);
-  },
+    defer(this.close.bind(this));
+  }
   close() {
     this.props.onRequestHide();
-  },
+  }
   send() {
     this.refs.directorForm.submit();
-  },
+  }
   render() {
     var title;
     var send;
@@ -60,7 +58,7 @@ const FormModal = React.createClass({
     return (
       <Modal {...this.props} ref="modalInstance" title={title} animation={false}>
         <div className='modal-body'>
-          <Formsy.Form ref="directorForm" onValidSubmit={this.submit}>
+          <Formsy.Form ref="directorForm" onValidSubmit={this.submit.bind(this)}>
             <BootstrapInput
               name="name"
               title="Name"
@@ -87,12 +85,10 @@ const FormModal = React.createClass({
           </Formsy.Form>
         </div>
         <div className='modal-footer'>
-          <Button className="pull-left" ref="closeButton" onClick={this.close}>Cancel</Button>
-          <Button bsStyle="success" type="submit" onClick={this.send}>{send}</Button>
+          <Button className="pull-left" ref="closeButton" onClick={this.close.bind(this)}>Cancel</Button>
+          <Button bsStyle="success" type="submit" onClick={this.send.bind(this)}>{send}</Button>
         </div>
       </Modal>
     );
   }
-});
-
-export default FormModal;
+}

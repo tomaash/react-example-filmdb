@@ -29,13 +29,13 @@ module.exports = {
     publicPath: '/assets/'
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.js$|.jsx$/,
-        exclude: /node_modules|styles/,
-        loaders: ['eslint', 'jscs']
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.js$|.jsx$/,
+    //     exclude: /node_modules|styles/,
+    //     loaders: ['eslint', 'jscs']
+    //   }
+    // ],
     loaders: [
       {
         test: /\.json$/,
