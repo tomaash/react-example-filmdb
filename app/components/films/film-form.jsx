@@ -5,45 +5,39 @@ import SelectInput from 'components/shared/select-input';
 import {Modal, Button} from 'react-bootstrap';
 import {defer} from 'lodash';
 
-if (process.env.BROWSER) {
-  require('react-select/dist/default.css');
-}
-
-const FilmForm = React.createClass({
-  propTypes: {
+export default class FilmForm extends React.Component {
+  static propTypes = {
     onRequestHide: React.PropTypes.func,
     flux: React.PropTypes.object.isRequired,
     editItem: React.PropTypes.object,
     directors: React.PropTypes.array
-  },
+  }
+  constructor(props) {
+    super(props);
+    this.actions = props.flux.getActions('films');
+  }
   componentDidMount() {
     this.refs.filmForm.reset(this.props.editItem);
-  },
-  filmsActions() {
-    return this.props.flux.getActions('films');
-  },
+  }
   submit(model) {
     if (this.props.editItem) {
-      this.filmsActions().update(this.props.editItem._id, model);
+      this.actions.update(this.props.editItem._id, model);
     }
     else {
-      this.filmsActions().add(model);
+      this.actions.add(model);
     }
     this.refs.filmForm.reset();
     // React complains if we update
     // DOM with form validations after close
     // so let's wait one tick
     defer(this.close);
-  },
+  }
   close() {
     this.props.onRequestHide();
-  },
+  }
   send() {
     this.refs.filmForm.submit();
-  },
-  logChange(val) {
-    console.log('Selected: ' + val);
-  },
+  }
   render() {
     var title;
     var send;
@@ -62,7 +56,7 @@ const FilmForm = React.createClass({
     return (
       <Modal {...this.props} ref="modalInstance" title={title} animation={false}>
         <div className='modal-body'>
-          <Formsy.Form ref="filmForm" onValidSubmit={this.submit}>
+          <Formsy.Form ref="filmForm" onValidSubmit={this.submit.bind(this)}>
             <BootstrapInput
               name="name"
               title="Name"
@@ -92,12 +86,10 @@ const FilmForm = React.createClass({
           </Formsy.Form>
         </div>
         <div className='modal-footer'>
-          <Button className="pull-left" ref="closeButton" onClick={this.close}>Close</Button>
-          <Button bsStyle="success" type="submit" onClick={this.send}>{send}</Button>
+          <Button className="pull-left" ref="closeButton" onClick={this.close.bind(this)}>Close</Button>
+          <Button bsStyle="success" type="submit" onClick={this.send.bind(this)}>{send}</Button>
         </div>
       </Modal>
     );
   }
-});
-
-export default FilmForm;
+}

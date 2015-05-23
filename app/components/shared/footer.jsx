@@ -1,17 +1,15 @@
-'use strict';
-
 import React from 'react';
 
-export default React.createClass({
-  displayName: 'footer',
+export default class Footer extends React.Component {
   render() {
     return (
       <footer className='app-footer'>
         <hr />
         <div className='app-footer-content'>
-          <p>foobar</p>
+          <p>Created by Tomas Holas for educational purposes. Please do not abuse.</p>
         </div>
       </footer>
     );
   }
-});
+}
+

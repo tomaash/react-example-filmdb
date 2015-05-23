@@ -3,35 +3,27 @@ import api from 'utils/api';
 import {clone} from 'lodash';
 import {networkAction} from 'utils/action-utils';
 
-class FilmsActions {
+export default class FilmsActions {
   fetch() {
-    networkAction({
-      context: this,
-      method: api.films.getAll
+    networkAction(this, api.films.getAll);
+  }
+  get(id) {
+    networkAction(this, api.films.get, id);
+  }
+  findByDirectorId(id) {
+    networkAction(this, api.films.getAll, {
+      conditions: JSON.stringify({
+        director: id
+      })
     });
   }
   add(data) {
-    networkAction({
-      context: this,
-      method: api.films.post,
-      data: clone(data)
-    });
+    networkAction(this, api.films.post, clone(data));
   }
   update(id, data) {
-    networkAction({
-      context: this,
-      method: api.films.put,
-      id: id,
-      data: clone(data)
-    });
+    networkAction(this, api.films.put, id, clone(data));
   }
   delete(id) {
-    networkAction({
-      context: this,
-      method: api.films.delete,
-      id: id
-    });
+    networkAction(this, api.films.delete, id);
   }
 }
-
-export default FilmsActions;

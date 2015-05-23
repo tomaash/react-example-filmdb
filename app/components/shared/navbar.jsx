@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import {Link} from 'react-router';
 import {NavItemLink} from 'react-router-bootstrap';
@@ -57,9 +55,6 @@ export default React.createClass({
               </Link>
             </div>
             <ul className="nav navbar-nav">
-              <li>
-                <NavItemLink to='cars'>Cars</NavItemLink>
-              </li>
               <li>
                 <NavItemLink to='directors'>Directors</NavItemLink>
               </li>

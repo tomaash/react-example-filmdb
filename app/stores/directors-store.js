@@ -7,6 +7,7 @@ class DirectorsStore {
     this.bindActions(this.alt.getActions('directors'));
     this.directors = [];
     this.directorsHash = {};
+    this.currentDirector = null;
   }
   onAdd(item) {
     this.directors.push(item);
@@ -17,7 +18,9 @@ class DirectorsStore {
       hash[item._id] = item;
       return hash;
     }, {});
-    console.log(this.directorsHash);
+  }
+  onGet(director) {
+    this.currentDirector = director;
   }
   onUpdate(item) {
     assign(findItemById(this.directors, item._id), item);

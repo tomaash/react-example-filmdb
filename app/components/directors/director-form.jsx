@@ -9,10 +9,14 @@ import {defer} from 'lodash';
 
 export default class DirectorForm extends React.Component {
   static propTypes = {
-    onRequestHide: React.PropTypes.func,
     flux: React.PropTypes.object.isRequired,
-    editItem: React.PropTypes.object,
-    DirectorsActions: React.PropTypes.object
+    // From ModalTrigger
+    onRequestHide: React.PropTypes.func,
+    editItem: React.PropTypes.object
+  }
+  constructor(props) {
+    super();
+    this.actions = props.flux.getActions('directors');
   }
   componentDidMount() {
     // Convert birthday to Date object to allow editing
@@ -23,10 +27,10 @@ export default class DirectorForm extends React.Component {
   }
   submit(model) {
     if (this.props.editItem) {
-      this.props.DirectorsActions.update(this.props.editItem._id, model);
+      this.actions.update(this.props.editItem._id, model);
     }
     else {
-      this.props.DirectorsActions.add(model);
+      this.actions.add(model);
     }
     this.refs.directorForm.reset();
     // React complains if we update
@@ -46,7 +50,6 @@ export default class DirectorForm extends React.Component {
     var nameError = 'Must have at least 2 letters';
     var textError = 'Must have at least 10 letters';
     var nationError = 'Nationality must be selected';
-    // var yearError = 'Must be a year from 20th or 21st century';
     if (this.props.editItem) {
       title = 'Edit director ' + this.props.editItem.name;
       send = 'Update';

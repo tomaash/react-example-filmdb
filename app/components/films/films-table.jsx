@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import FilmForm from './film-form';
 import {ModalTrigger, Button} from 'react-bootstrap';
@@ -42,6 +40,9 @@ export default class FilmsTable extends React.Component {
     });
     this.refs.modalTrigger.show();
   }
+  showProfile(item) {
+    return this.context.router.transitionTo('film', {id: item._id});
+  }
   render() {
     return (
       <div className="container-fluid">
@@ -70,9 +71,18 @@ export default class FilmsTable extends React.Component {
               <td>
               <div className="action">
                 <span className="action-buttons">
-                  <button className='btn btn-xs btn-primary'>Show</button>
-                  <button onClick={this.edit.bind(this, item)} className='btn btn-xs btn-warning'>Edit</button>
-                  <button onClick={this.delete.bind(this, item)} className='btn btn-xs btn-danger'>Delete</button>
+                  <Button
+                    bsStyle="primary"
+                    bsSize="xsmall"
+                    onClick={this.showProfile.bind(this, item)}>Show</Button>
+                  <Button
+                    bsStyle="warning"
+                    bsSize="xsmall"
+                    onClick={this.edit.bind(this, item)}>Edit</Button>
+                  <Button
+                    bsStyle="danger"
+                    bsSize="xsmall"
+                    onClick={this.delete.bind(this, item)}>Delete</Button>
                 </span>
               </div>
               </td>

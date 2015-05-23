@@ -9,20 +9,18 @@ export default (
   <Route name='app' path='/' handler={require('./components/app')}>
     <DefaultRoute
       name='directors'
-      handler={require('./components/directors')} />
-    <Route
-      name='users'
-      handler={require('./components/users')} />
-    <Route
-      name='cars'
-      handler={require('./components/cars')} />
+      handler={require('./components/directors/directors-table')} />
     <Route
       name='films'
       handler={require('./components/films')} />
     <Route
-      name='profile'
-      path='profile/:seed'
-      handler={require('./components/profile')} />
+      name='director'
+      path='director/:id'
+      handler={require('./components/director-profile')} />
+    <Route
+      name='film'
+      path='film/:id'
+      handler={require('./components/film-profile')} />
     <NotFoundRoute handler={require('./pages/not-found')} />
   </Route>
 );

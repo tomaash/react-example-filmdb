@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import classNames from 'classnames';
 import ListenerMixin from 'alt/mixins/ListenerMixin';

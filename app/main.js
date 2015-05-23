@@ -24,6 +24,11 @@ const boostrap = () => {
   // Init alt instance
   const flux = new Flux();
 
+  if (process.env.BROWSER) {
+    var chromeDebug = require('alt/utils/chromeDebug');
+    chromeDebug(flux);
+  }
+
   // bootstrap application with data from server
   const boot = await boostrap();
   flux.bootstrap(boot.initialState);

@@ -3,35 +3,20 @@ import api from 'utils/api';
 import {clone} from 'lodash';
 import {networkAction} from 'utils/action-utils';
 
-class DirectorsActions {
+export default class DirectorsActions {
   fetch() {
-    networkAction({
-      context: this,
-      method: api.directors.getAll
-    });
+    networkAction(this, api.directors.getAll);
+  }
+  get(id) {
+    networkAction(this, api.directors.get, id);
   }
   add(data) {
-    networkAction({
-      context: this,
-      method: api.directors.post,
-      data: clone(data)
-    });
+    networkAction(this, api.directors.post, clone(data));
   }
   update(id, data) {
-    networkAction({
-      context: this,
-      method: api.directors.put,
-      id: id,
-      data: clone(data)
-    });
+    networkAction(this, api.directors.put, id, clone(data));
   }
   delete(id) {
-    networkAction({
-      context: this,
-      method: api.directors.delete,
-      id: id
-    });
+    networkAction(this, api.directors.delete, id);
   }
 }
-
-export default DirectorsActions;

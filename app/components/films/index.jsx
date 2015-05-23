@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import AltContainer from 'alt/AltContainer';
 import FilmsTable from './films-table';
