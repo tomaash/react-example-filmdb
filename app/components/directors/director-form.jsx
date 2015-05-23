@@ -7,7 +7,7 @@ import {Modal, Button} from 'react-bootstrap';
 import countries from 'utils/countries';
 import {defer} from 'lodash';
 
-export default class DirectorsForm extends React.Component {
+export default class DirectorForm extends React.Component {
   static propTypes = {
     onRequestHide: React.PropTypes.func,
     flux: React.PropTypes.object.isRequired,

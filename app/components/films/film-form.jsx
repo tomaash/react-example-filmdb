@@ -9,7 +9,7 @@ if (process.env.BROWSER) {
   require('react-select/dist/default.css');
 }
 
-const FormModal = React.createClass({
+const FilmForm = React.createClass({
   propTypes: {
     onRequestHide: React.PropTypes.func,
     flux: React.PropTypes.object.isRequired,
@@ -74,7 +74,9 @@ const FormModal = React.createClass({
               title="Director"
               validations="isLength:24"
               validationError={idError}
-              options={this.props.directors}/>
+              options={this.props.directors.map(x => {
+                return {value: x._id, label: x.name};
+              })}/>
             <BootstrapInput
               name="year"
               title="Year"
@@ -98,4 +100,4 @@ const FormModal = React.createClass({
   }
 });
 
-export default FormModal;
+export default FilmForm;

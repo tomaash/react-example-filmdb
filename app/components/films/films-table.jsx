@@ -1,11 +1,10 @@
 'use strict';
 
 import React from 'react';
-import DirectorForm from './director-form';
+import FilmForm from './film-form';
 import {ModalTrigger, Button} from 'react-bootstrap';
-import moment from 'moment';
 
-export default class DirectorsTable extends React.Component {
+export default class FilmsTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,56 +14,59 @@ export default class DirectorsTable extends React.Component {
   }
   static propTypes = {
     flux: React.PropTypes.object,
+    FilmsActions: React.PropTypes.object,
     DirectorsActions: React.PropTypes.object,
+    FilmsStore: React.PropTypes.object,
     DirectorsStore: React.PropTypes.object
   }
   componentWillMount() {
-    return this.props.DirectorsActions.fetch();
+    this.props.FilmsActions.fetch();
+    this.props.DirectorsActions.fetch();
+  }
+  directorName(id) {
+    const data = this.props.DirectorsStore.directorsHash[id];
+    return data && data.name;
   }
   delete(item) {
-    this.props.DirectorsActions.delete(item._id);
+    this.props.FilmsActions.delete(item._id);
   }
   edit(item) {
-    this.setState({editItem: item});
+    this.setState({
+      editItem: item
+    });
     this.refs.modalTrigger.show();
   }
   add() {
-    this.setState({editItem: null});
+    this.setState({
+      editItem: null
+    });
     this.refs.modalTrigger.show();
   }
   render() {
     return (
       <div className="container-fluid">
-        <h1>Directors</h1>
-        <ModalTrigger
-          ref="modalTrigger"
-          modal={
-            <DirectorForm
-              flux={this.props.flux}
-              DirectorsActions={this.props.DirectorsActions}
-              editItem={this.state.editItem}
-             />}>
-            <span/>
+        <h1>Films</h1>
+        <ModalTrigger ref="modalTrigger" modal={<FilmForm flux={this.props.flux} editItem={this.state.editItem} directors={this.props.DirectorsStore.directors}/>}><span/>
         </ModalTrigger>
-        <Button bsStyle="primary" bsSize="large" onClick={this.add.bind(this)}>Add new director</Button>
+        <Button bsStyle="primary" bsSize="large" onClick={this.add.bind(this)}>Add new film</Button>
         <br/>
         <table className="table table-striped item-table">
           <thead>
             <tr>
               <th>Name</th>
-              <th>Nationality</th>
-              <th>Birthday</th>
-              <th>Biography</th>
+              <th>Director</th>
+              <th>Year</th>
+              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.DirectorsStore.directors && this.props.DirectorsStore.directors.map((item, index) =>
+            {this.props.FilmsStore.films && this.props.FilmsStore.films.map((item, index) =>
             <tr key={index}>
               <td>{item.name}</td>
-              <td>{item.nationality}</td>
-              <td>{moment(item.birthday).format('D MMMM YYYY')}</td>
-              <td className="ellipsis">{item.biography}</td>
+              <td>{this.directorName(item.director)}</td>
+              <td>{item.year}</td>
+              <td className="ellipsis">{item.description}</td>
               <td>
               <div className="action">
                 <span className="action-buttons">
@@ -82,6 +84,4 @@ export default class DirectorsTable extends React.Component {
     );
   }
 }
-
-
 
