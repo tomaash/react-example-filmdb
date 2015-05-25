@@ -30,7 +30,7 @@ export default class FilmForm extends React.Component {
     // React complains if we update
     // DOM with form validations after close
     // so let's wait one tick
-    defer(this.close);
+    defer(this.close.bind(this));
   }
   close() {
     this.props.onRequestHide();

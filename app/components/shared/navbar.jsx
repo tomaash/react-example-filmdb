@@ -1,38 +1,31 @@
 import React from 'react';
+import connectToStores from 'alt/utils/connectToStores';
 import {Link} from 'react-router';
 import {NavItemLink} from 'react-router-bootstrap';
 import {Alert, Button} from 'react-bootstrap';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
 
-// import imageResolver from 'utils/image-resolver';
-
-export default React.createClass({
-  displayName: 'Navbar',
-  mixins: [ListenerMixin],
-  propTypes: {
+@connectToStores
+export default class Navbar extends React.Component {
+  static propTypes = {
     flux: React.PropTypes.object.isRequired
-  },
-  statusStore() {
-    return this.props.flux.getStore('status');
-  },
-  getInitialState() {
-    return this.statusStore().getState();
-  },
-  componentDidMount() {
-    this.listenTo(this.statusStore(), this.handleStoreChange);
-  },
-  handleStoreChange() {
-    this.setState(this.getInitialState());
-  },
+  }
+  static getStores(props) {
+    return [
+      props.flux.getStore('status')
+    ];
+  }
+  static getPropsFromStores(props) {
+    return props.flux.getStore('status').getState();
+  }
   retry() {
     this.props.flux.getActions('status').retry();
-  },
+  }
   render() {
     var errorComponent;
     var retryComponent;
     var busyComponent;
-    if (this.state.error) {
-      if (this.state.retryData) {
+    if (this.props.error) {
+      if (this.props.retryData) {
         retryComponent = <Button onClick={this.retry} bsStyle="danger" bsSize="xsmall" className="pull-right">Retry</Button>;
       }
       errorComponent = (
@@ -42,7 +35,7 @@ export default React.createClass({
       </Alert>);
     }
     // Prerender busy on server as not to lose markup state on client
-    if (this.state.busy || !process.env.BROWSER) {
+    if (this.props.busy || !process.env.BROWSER) {
       busyComponent = <div className="busy-indicator pull-right"><i className="fa fa-refresh fa-spin"></i></div>;
     }
     return (
@@ -69,5 +62,6 @@ export default React.createClass({
       </div>
     );
   }
-});
+}
+
 
