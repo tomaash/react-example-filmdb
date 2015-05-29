@@ -9,6 +9,9 @@ export default class Navbar extends React.Component {
   static propTypes = {
     flux: React.PropTypes.object.isRequired
   }
+  static contextTypes = {
+    router: React.PropTypes.func
+  }
   static getStores(props) {
     return [
       props.flux.getStore('status')
@@ -19,6 +22,11 @@ export default class Navbar extends React.Component {
   }
   retry() {
     this.props.flux.getActions('status').retry();
+  }
+  logout() {
+    console.log('logout!');
+    this.props.flux.getActions('login').logout();
+    this.context.router.transitionTo('login');
   }
   render() {
     var errorComponent;
@@ -53,6 +61,14 @@ export default class Navbar extends React.Component {
               </li>
               <li>
                 <NavItemLink to='films'>Films</NavItemLink>
+              </li>
+              <li>
+                <NavItemLink to='login'>Login</NavItemLink>
+              </li>
+            </ul>
+            <ul className="nav navbar-nav pull-right">
+              <li onClick={this.logout.bind(this)}>
+                <a href="#">Logout</a>
               </li>
             </ul>
             {busyComponent}

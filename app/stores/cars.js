@@ -1,7 +1,7 @@
 'use strict';
 import {assign} from 'lodash';
 
-class CarsStore {
+export default class CarsStore {
   constructor() {
     this.bindActions(this.alt.getActions('cars'));
     this.cars = [{brand: 'kukabus'}];
@@ -29,5 +29,3 @@ class CarsStore {
   }
 
 }
-
-export default CarsStore;

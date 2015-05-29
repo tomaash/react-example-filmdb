@@ -2,7 +2,7 @@
 import {assign} from 'lodash';
 import {findItemById, findIndexById} from 'utils/store-utils';
 
-class FilmsStore {
+export default class FilmsStore {
   constructor() {
     this.bindActions(this.alt.getActions('films'));
     this.films = [];
@@ -30,5 +30,3 @@ class FilmsStore {
     this.films.splice(findIndexById(this.films, item._id), 1);
   }
 }
-
-export default FilmsStore;

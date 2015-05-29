@@ -2,7 +2,7 @@
 import {assign} from 'lodash';
 import {findItemById, findIndexById} from 'utils/store-utils';
 
-class DirectorsStore {
+export default class DirectorsStore {
   constructor() {
     this.bindActions(this.alt.getActions('directors'));
     this.directors = [];
@@ -29,5 +29,3 @@ class DirectorsStore {
     this.directors.splice(findIndexById(this.directors, item._id), 1);
   }
 }
-
-export default DirectorsStore;

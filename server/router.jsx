@@ -40,15 +40,15 @@ export default function *() {
     const flux = new Flux();
 
     // Get request locale for rendering
-    const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
-    const {messages} = require(`data/${locale}`);
+    // const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
+    // const {messages} = require(`data/${locale}`);
 
     // Populate store with locale
-    flux
-      .getActions('locale')
-      .switchLocaleSuccess({locale, messages});
+    // flux
+    //   .getActions('locale')
+    //   .switchLocaleSuccess({locale, messages});
 
-    debug('dev')(`locale of request: ${locale}`);
+    // debug('dev')(`locale of request: ${locale}`);
 
     const handler = yield promisify(router.run);
     const content = yield flux.render(handler);
@@ -65,6 +65,6 @@ export default function *() {
     }
 
     debug('dev')('return html content');
-    yield this.render('main', {content, assets, locale});
+    yield this.render('main', {content, assets});
   }
 }

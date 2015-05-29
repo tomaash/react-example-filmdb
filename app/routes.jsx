@@ -11,6 +11,9 @@ export default (
       name='directors'
       handler={require('./components/directors/directors-table')} />
     <Route
+      name='login'
+      handler={require('./components/login')} />
+    <Route
       name='films'
       handler={require('./components/films')} />
     <Route

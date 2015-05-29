@@ -14,7 +14,10 @@ td.ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
 .validation-error {
   display: none;
 }

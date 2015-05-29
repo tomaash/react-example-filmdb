@@ -2,7 +2,7 @@
 import axios from 'axios';
 // import {defer} from 'lodash';
 
-class StatusStore {
+export default class StatusStore {
   constructor() {
     this.bindActions(this.alt.getActions('status'));
     this.busy = false;
@@ -29,5 +29,3 @@ class StatusStore {
   }
 
 }
-
-export default StatusStore;

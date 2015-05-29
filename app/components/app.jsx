@@ -10,14 +10,21 @@ export default class App extends React.Component {
   static propTypes = {
     flux: React.PropTypes.object.isRequired
   }
+  static contextTypes = {
+    router: React.PropTypes.func
+  }
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
+    var navbar;
+    if (this.context.router.getCurrentPathname() !== '/loginfoo') {
+      navbar = <Navbar {...this.props}/>;
+    }
     return (
       <div className="container-fluid">
-        <Navbar {...this.props}/>
+        {navbar}
         <RouteHandler {...this.props}/>
         <Footer />
       </div>

@@ -66,7 +66,7 @@ module.exports = {
     // 'pager': true,
     'labels': true,
     // 'badges': true,
-    // 'jumbotron': true,
+    'jumbotron': true,
     'thumbnails': true,
     'alerts': true,
     // 'progress-bars': true,
