@@ -17,6 +17,9 @@ export default class App extends React.Component {
     super(props);
     this.state = {};
   }
+  componentWillMount() {
+    this.props.flux.router = this.context.router;
+  }
   render() {
     var navbar;
     if (this.context.router.getCurrentPathname() !== '/loginfoo') {

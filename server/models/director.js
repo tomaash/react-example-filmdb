@@ -4,6 +4,10 @@ const DirectorSchema = new mongoose.Schema({
     nationality: String,
     birthday: Date,
     biography: String,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    },
     createdAt: {
       type: Date,
       default: Date.now

@@ -11,11 +11,13 @@ import logger from 'koa-logger';
 import favicon from 'koa-favicon';
 import staticCache from 'koa-static-cache';
 import responseTime from 'koa-response-time';
+import bodyParser from 'koa-body-parser';
 
 import router from './router';
 import config from './config/init';
 
 import rest from './rest';
+import {clone} from 'lodash';
 
 const app = koa();
 const env = process.env.NODE_ENV || 'development';
@@ -68,6 +70,46 @@ if (env === 'development') {
 else {
   app.use(mount('/assets', staticCache(path.join(__dirname, '../dist'), cacheOpts)));
 }
+
+// Parse body
+app.use(bodyParser());
+
+import User from './models/user';
+
+// Authenticate
+app.use(function *(next) {
+  const token = this.req.headers['auth-token'];
+  var isApi = !!this.request.url.match(/^\/api/);
+  console.log('isapi');
+  console.log(isApi);
+  const user = token && (yield User.findOne({token}));
+  console.log('user');
+  console.log(user);
+  this.request.user = user;
+  if (user) {
+    if (this.request.method === 'GET') {
+      var conditions;
+      var query = clone(this.request.query);
+      try {
+        conditions = (query.conditions && JSON.parse(query.conditions)) || {};
+      } catch (err) {
+        console.error(err);
+        conditions = {};
+      }
+      conditions.user = user._id;
+      query.conditions = JSON.stringify(conditions);
+      this.request.query = query;
+      console.log('has query');
+      console.log(this.request.query);
+    }
+    else if (this.request.body) {
+      console.log('has body');
+      this.request.body.user = user._id;
+      console.log(this.request.body);
+    }
+  }
+  yield next;
+});
 
 // Connect REST API
 rest(app);

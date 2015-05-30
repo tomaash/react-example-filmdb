@@ -5,7 +5,6 @@ import {Input, Button, Alert} from 'react-bootstrap';
 import {changeHandler} from 'utils/component-utils';
 
 import connectToStores from 'alt/utils/connectToStores';
-import {defer} from 'lodash';
 
 @connectToStores
 @changeHandler
@@ -25,19 +24,13 @@ export default class FilmProfile extends React.Component {
     flux: React.PropTypes.object.isRequired,
     error: React.PropTypes.string
   }
-  static router = null
   static getStores(props) {
     return [props.flux.getStore('login')];
   }
   static getPropsFromStores(props) {
-    const state = props.flux.getStore('login').getState();
-    if (state.user) {
-      defer(FilmProfile.router.transitionTo.bind(this, 'directors'));
-    }
-    return state;
+    return props.flux.getStore('login').getState();
   }
-  componentDidMount() {
-    FilmProfile.router = this.context.router;
+  componentWillMount() {
     this.state = {
       login: {}
     };

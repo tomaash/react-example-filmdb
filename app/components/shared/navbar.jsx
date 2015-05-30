@@ -26,7 +26,6 @@ export default class Navbar extends React.Component {
   logout() {
     console.log('logout!');
     this.props.flux.getActions('login').logout();
-    this.context.router.transitionTo('login');
   }
   render() {
     var errorComponent;

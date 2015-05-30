@@ -3,17 +3,17 @@ const FilmSchema = new mongoose.Schema({
   name: String,
   director: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'directors'
+    ref: 'director'
   },
   description: String,
   year: Number,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user'
+  },
   createdAt: {
     type: Date,
     default: Date.now
-  },
-  likes: {
-    type: Number,
-    default: 0
   }
 });
 

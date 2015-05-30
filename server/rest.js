@@ -4,7 +4,6 @@ import Car from './models/car';
 import Director from './models/director';
 import Film from './models/film';
 import User from './models/user';
-import parse from 'co-body';
 import bcrypt from 'bcrypt';
 import uuid from 'node-uuid';
 
@@ -15,14 +14,16 @@ export default function(app) {
 
   app.use(koaRouter(app));
 
+  generateApi(app, Car, '/api');
+  generateApi(app, Film, '/api');
+  generateApi(app, Director, '/api');
+
   app.post('/auth/register', function *(next) {
     yield next;
     const SALT_WORK_FACTOR = 10;
     const error = {message: 'Username already exists'};
     try {
-      const body = yield parse(this, {
-        limit: '1kb'
-      });
+      const body = this.request.body;
       const salt = yield bcrypt.genSalt.bind(this, SALT_WORK_FACTOR);
       const hash = yield bcrypt.hash.bind(this, body.password, salt);
       body.password = hash;
@@ -39,10 +40,8 @@ export default function(app) {
   app.post('/auth/login', function *(next) {
     yield next;
     try {
+      const body = this.request.body;
       const error = {message: 'Username and password doesn\'t match'};
-      const body = yield parse(this, {
-        limit: '1kb'
-      });
       const user = yield User.findOne({
         username: body.username
       });
@@ -58,9 +57,6 @@ export default function(app) {
     }
   });
 
-  generateApi(app, Car, '/api');
-  generateApi(app, Film, '/api');
-  generateApi(app, Director, '/api');
   // generateApi(app, User, '/api');
 }
 
