@@ -5,29 +5,30 @@ import {ModalTrigger, Button} from 'react-bootstrap';
 import moment from 'moment';
 import connectToStores from 'alt/utils/connectToStores';
 
+import DirectorsStore from 'stores/directors-store';
+import DirectorsActions from 'actions/directors-actions';
+
 @connectToStores
 export default class DirectorsTable extends React.Component {
   static contextTypes = {
     router: React.PropTypes.func
   }
   static propTypes = {
-    flux: React.PropTypes.object,
     directors: React.PropTypes.array,
     directorsHash: React.PropTypes.object
   }
   static getStores(props) {
-    return [props.flux.getStore('directors')];
+    return [DirectorsStore];
   }
   static getPropsFromStores(props) {
-    return props.flux.getStore('directors').getState();
+    return DirectorsStore.getState();
   }
   constructor(props) {
     super(props);
     this.state = {};
-    this.actions = this.props.flux.getActions('directors');
   }
   componentWillMount() {
-    return this.actions.fetch();
+    return DirectorsActions.fetch();
   }
   add() {
     this.refs.modalTrigger.props.modal.props.editItem = null;
@@ -65,7 +66,7 @@ export default class DirectorsTable extends React.Component {
                 <ActionBar
                   item={item}
                   showRoute="director"
-                  deleteAction={this.actions.delete}
+                  deleteAction={DirectorsActions.delete}
                   modalTrigger={this.refs.modalTrigger}/>
               </td>
             </tr>

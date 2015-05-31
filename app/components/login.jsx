@@ -6,6 +6,9 @@ import {changeHandler} from 'utils/component-utils';
 
 import connectToStores from 'alt/utils/connectToStores';
 
+import LoginStore from 'stores/login-store';
+import LoginActions from 'actions/login-actions';
+
 @connectToStores
 @changeHandler
 export default class FilmProfile extends React.Component {
@@ -14,21 +17,20 @@ export default class FilmProfile extends React.Component {
     this.state = {
       login: {}
     };
-    this.actions = props.flux.getActions('login');
-    this.store = props.flux.getStore('login');
+    this.actions = LoginActions;
+    this.store = LoginStore;
   }
   static contextTypes = {
     router: React.PropTypes.func
   }
   static propTypes = {
-    flux: React.PropTypes.object.isRequired,
     error: React.PropTypes.string
   }
-  static getStores(props) {
-    return [props.flux.getStore('login')];
+  static getStores() {
+    return [LoginStore];
   }
-  static getPropsFromStores(props) {
-    return props.flux.getStore('login').getState();
+  static getPropsFromStores() {
+    return LoginStore.getState();
   }
   componentWillMount() {
     this.state = {

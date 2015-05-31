@@ -1,12 +1,12 @@
-'use strict';
+import alt from 'utils/alt';
 import {defer} from 'lodash';
 import api from 'utils/api';
-// import {assign} from 'lodash';
-// import {findItemById, findIndexById} from 'utils/store-utils';
+import LoginActions from 'actions/login-actions';
+import {routerObject} from 'utils/store-utils';
 
-export default class LoginStore {
+class LoginStore {
   constructor() {
-    this.bindActions(this.alt.getActions('login'));
+    this.bindActions(LoginActions);
     this.user = null;
     this.error = null;
   }
@@ -15,7 +15,7 @@ export default class LoginStore {
       this.user = data.user;
       this.error = null;
       api.updateToken(this.user.token);
-      defer(this.alt.router.transitionTo.bind(this, 'directors'));
+      defer(routerObject.transitionTo.bind(this, 'directors'));
     }
     else {
       api.updateToken(null);
@@ -33,6 +33,8 @@ export default class LoginStore {
     this.user = null;
     this.error = null;
     api.updateToken(null);
-    defer(this.alt.router.transitionTo.bind(this, 'login'));
+    defer(routerObject.transitionTo.bind(this, 'login'));
   }
 }
+
+module.exports = (alt.createStore(LoginStore));

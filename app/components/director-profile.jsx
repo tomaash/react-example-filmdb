@@ -4,32 +4,37 @@ import React from 'react';
 import connectToStores from 'alt/utils/connectToStores';
 import FilmItem from 'components/shared/film-item';
 
+import DirectorsStore from 'stores/directors-store';
+import FilmsStore from 'stores/films-store';
+import StatusStore from 'stores/directors-store';
+import LoginStore from 'stores/login-store';
+import DirectorsActions from 'actions/directors-actions';
+import FilmsActions from 'actions/films-actions';
+import StatusActions from 'actions/status-actions';
+import LoginActions from 'actions/login-actions';
+
 @connectToStores
 export default class DirectorProfile extends React.Component {
   static contextTypes = {
     router: React.PropTypes.func
   }
-  static propTypes = {
-    flux: React.PropTypes.object.isRequired
+  // static propTypes = {
+  //   flux: React.PropTypes.object.isRequired
+  // }
+  static getStores() {
+    return [DirectorsStore, FilmsStore, StatusStore];
   }
-  static getStores(props) {
-    return [
-      props.flux.getStore('directors'),
-      props.flux.getStore('films'),
-      props.flux.getStore('status')
-    ];
-  }
-  static getPropsFromStores(props) {
+  static getPropsFromStores() {
     return {
-      director: props.flux.getStore('directors').getState().currentDirector,
-      films: props.flux.getStore('films').getState().filteredFilms,
-      status: props.flux.getStore('status').getState()
+      director: DirectorsStore.getState().currentDirector,
+      films: FilmsStore.getState().filteredFilms,
+      status: StatusStore.getState()
     };
   }
   componentWillMount() {
     const id = this.context.router.getCurrentParams().id;
-    this.props.flux.getActions('directors').get(id);
-    this.props.flux.getActions('films').findByDirectorId(id);
+    DirectorsActions.get(id);
+    FilmsActions.findByDirectorId(id);
   }
   render() {
     if (this.props.director === null) {

@@ -4,28 +4,29 @@ import {Link} from 'react-router';
 import {NavItemLink} from 'react-router-bootstrap';
 import {Alert, Button} from 'react-bootstrap';
 
+import StatusStore from 'stores/directors-store';
+import StatusActions from 'actions/status-actions';
+import LoginActions from 'actions/login-actions';
+
 @connectToStores
 export default class Navbar extends React.Component {
-  static propTypes = {
-    flux: React.PropTypes.object.isRequired
-  }
   static contextTypes = {
     router: React.PropTypes.func
   }
-  static getStores(props) {
+  static getStores() {
     return [
-      props.flux.getStore('status')
+      StatusStore
     ];
   }
-  static getPropsFromStores(props) {
-    return props.flux.getStore('status').getState();
+  static getPropsFromStores() {
+    return StatusStore.getState();
   }
   retry() {
-    this.props.flux.getActions('status').retry();
+    StatusActions.retry();
   }
   logout() {
     console.log('logout!');
-    this.props.flux.getActions('login').logout();
+    LoginActions.logout();
   }
   render() {
     var errorComponent;

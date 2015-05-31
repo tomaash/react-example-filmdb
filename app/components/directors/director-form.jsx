@@ -7,16 +7,12 @@ import {Modal, Button} from 'react-bootstrap';
 import countries from 'utils/countries';
 import {defer} from 'lodash';
 
+import DirectorsActions from 'actions/directors-actions';
+
 export default class DirectorForm extends React.Component {
   static propTypes = {
-    flux: React.PropTypes.object.isRequired,
-    // From ModalTrigger
     onRequestHide: React.PropTypes.func,
     editItem: React.PropTypes.object
-  }
-  constructor(props) {
-    super();
-    this.actions = props.flux.getActions('directors');
   }
   componentDidMount() {
     // Convert birthday to Date object to allow editing
@@ -27,10 +23,10 @@ export default class DirectorForm extends React.Component {
   }
   submit(model) {
     if (this.props.editItem) {
-      this.actions.update(this.props.editItem._id, model);
+      DirectorsActions.update(this.props.editItem._id, model);
     }
     else {
-      this.actions.add(model);
+      DirectorsActions.add(model);
     }
     this.refs.directorForm.reset();
     // React complains if we update

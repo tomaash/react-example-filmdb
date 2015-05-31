@@ -1,10 +1,12 @@
-'use strict';
-import {assign} from 'lodash';
+import alt from 'utils/alt';
+import {assign, defer} from 'lodash';
 import {findItemById, findIndexById} from 'utils/store-utils';
+import FilmsActions from 'actions/films-actions';
+import DirectorsActions from 'actions/films-actions';
 
-export default class FilmsStore {
+class FilmsStore {
   constructor() {
-    this.bindActions(this.alt.getActions('films'));
+    this.bindActions(FilmsActions);
     this.films = [];
     this.currentFilm = null;
     this.filteredFilms = [];
@@ -17,8 +19,9 @@ export default class FilmsStore {
   }
   onGet(film) {
     this.currentFilm = film;
+    // DirectorsActions.get.defer(film.director);
     // Fetch director for current film
-    this.alt.getActions('directors').get.defer(film.director);
+    // defer(DirectorsActions.get.bind(this, film.director));
   }
   onFindByDirectorId(films) {
     this.filteredFilms = films;
@@ -30,3 +33,6 @@ export default class FilmsStore {
     this.films.splice(findIndexById(this.films, item._id), 1);
   }
 }
+
+module.exports = (alt.createStore(FilmsStore));
+

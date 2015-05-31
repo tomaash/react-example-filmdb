@@ -5,7 +5,9 @@ import React from 'react';
 import Router from 'react-router';
 
 // Paths are relative to `app` directory
-import Flux from 'utils/flux';
+// import alt from 'utils/alt';
+
+import alt from 'utils/alt';
 // import intlLoader from 'utils/intl-loader';
 
 if (process.env.NODE_ENV === 'development') {
@@ -22,16 +24,17 @@ const boostrap = () => {
 
 (async () => {
   // Init alt instance
-  const flux = new Flux();
+  // const flux = new Flux();
 
   if (process.env.BROWSER) {
     var chromeDebug = require('alt/utils/chromeDebug');
-    chromeDebug(flux);
+    chromeDebug(alt);
   }
 
   // bootstrap application with data from server
-  const boot = await boostrap();
-  flux.bootstrap(boot.initialState);
+
+  // const boot = await boostrap();
+  // alt.bootstrap(boot.initialState);
 
   // load the intl-polyfill if needed
   // load the correct data/{lang}.json into app
@@ -49,8 +52,10 @@ const boostrap = () => {
     routes,
     Router.HistoryLocation,
     (Handler) => {
-      const app = React.createElement(Handler, {flux});
-      React.render(app, boot.container);
+      // , {flux}
+      const app = React.createElement(Handler);
+      // React.render(app, boot.container);
+      React.render(app, document.getElementById('content'));
     }
   );
 })();

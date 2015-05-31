@@ -8,8 +8,10 @@ import Router from 'react-router';
 
 // Paths are relative to `app` directory
 import routes from 'routes';
-import Flux from 'utils/flux';
+// import Flux from 'utils/flux';
 import promisify from 'utils/promisify';
+// import Iso from 'iso';
+// import alt from 'alt';
 
 export default function *() {
   const isCashed = this.cashed ? yield *this.cashed() : false;
@@ -37,7 +39,7 @@ export default function *() {
     });
 
     // Init alt instance
-    const flux = new Flux();
+    // const flux = new Flux();
 
     // Get request locale for rendering
     // const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
@@ -50,11 +52,15 @@ export default function *() {
 
     // debug('dev')(`locale of request: ${locale}`);
 
-    const handler = yield promisify(router.run);
-    const content = yield flux.render(handler);
+    // TEMPORARY
+
+    // const handler = yield promisify(router.run);
+    // const content = yield flux.render(handler);
 
     // Reload './webpack-stats.json' on dev
     // cache it on production
+
+    var content = '';
     let assets;
     if (process.env.NODE_ENV === 'development') {
       assets = fs.readFileSync(path.resolve(__dirname, './webpack-stats.json'));

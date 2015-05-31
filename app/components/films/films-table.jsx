@@ -3,6 +3,9 @@ import FilmForm from './film-form';
 import {ModalTrigger, Button} from 'react-bootstrap';
 import ActionBar from 'components/shared/action-bar';
 
+import DirectorsActions from 'actions/directors-actions';
+import FilmsActions from 'actions/films-actions';
+
 export default class FilmsTable extends React.Component {
   constructor(props) {
     super(props);
@@ -12,15 +15,12 @@ export default class FilmsTable extends React.Component {
     router: React.PropTypes.func
   }
   static propTypes = {
-    flux: React.PropTypes.object,
-    FilmsActions: React.PropTypes.object,
-    DirectorsActions: React.PropTypes.object,
     FilmsStore: React.PropTypes.object,
     DirectorsStore: React.PropTypes.object
   }
   componentWillMount() {
-    this.props.FilmsActions.fetch();
-    this.props.DirectorsActions.fetch();
+    FilmsActions.fetch();
+    DirectorsActions.fetch();
   }
   directorName(id) {
     const data = this.props.DirectorsStore.directorsHash[id];
@@ -63,7 +63,7 @@ export default class FilmsTable extends React.Component {
                 <ActionBar
                   item={item}
                   showRoute="film"
-                  deleteAction={this.props.FilmsActions.delete}
+                  deleteAction={FilmsActions.delete}
                   modalTrigger={this.refs.modalTrigger}/>
               </td>
             </tr>

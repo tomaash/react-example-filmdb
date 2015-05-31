@@ -1,9 +1,9 @@
-'use strict';
+import alt from 'utils/alt';
 import api from 'utils/api';
 import {clone} from 'lodash';
 import {networkAction} from 'utils/action-utils';
 
-export default class FilmsActions {
+class FilmsActions {
   fetch() {
     networkAction(this, api.films.getAll);
   }
@@ -27,3 +27,5 @@ export default class FilmsActions {
     networkAction(this, api.films.delete, id);
   }
 }
+
+module.exports = (alt.createActions(FilmsActions));

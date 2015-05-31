@@ -1,7 +1,7 @@
-'use strict';
+import alt from 'utils/alt';
 import axios from 'axios';
 
-export default class LoginActions {
+class LoginActions {
   constructor() {
     this.generateActions('logout');
   }
@@ -24,3 +24,5 @@ export default class LoginActions {
     }
   }
 }
+
+module.exports = (alt.createActions(LoginActions));

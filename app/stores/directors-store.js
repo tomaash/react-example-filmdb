@@ -1,10 +1,11 @@
-'use strict';
+import alt from 'utils/alt';
 import {assign} from 'lodash';
 import {findItemById, findIndexById} from 'utils/store-utils';
+import DirectorsActions from 'actions/directors-actions';
 
-export default class DirectorsStore {
+class DirectorsStore {
   constructor() {
-    this.bindActions(this.alt.getActions('directors'));
+    this.bindActions(DirectorsActions);
     this.directors = [];
     this.directorsHash = {};
     this.currentDirector = null;
@@ -28,4 +29,10 @@ export default class DirectorsStore {
   onDelete(item) {
     this.directors.splice(findIndexById(this.directors, item._id), 1);
   }
+  onRemoveCurrent() {
+    this.currentDirector = null;
+  }
+
 }
+
+module.exports = (alt.createStore(DirectorsStore));

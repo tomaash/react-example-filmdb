@@ -5,26 +5,26 @@ import SelectInput from 'components/shared/select-input';
 import {Modal, Button} from 'react-bootstrap';
 import {defer} from 'lodash';
 
+import FilmsActions from 'actions/films-actions';
+
 export default class FilmForm extends React.Component {
   static propTypes = {
     onRequestHide: React.PropTypes.func,
-    flux: React.PropTypes.object.isRequired,
     editItem: React.PropTypes.object,
     directors: React.PropTypes.array
   }
   constructor(props) {
     super(props);
-    this.actions = props.flux.getActions('films');
   }
   componentDidMount() {
     this.refs.filmForm.reset(this.props.editItem);
   }
   submit(model) {
     if (this.props.editItem) {
-      this.actions.update(this.props.editItem._id, model);
+      FilmsActions.update(this.props.editItem._id, model);
     }
     else {
-      this.actions.add(model);
+      FilmsActions.add(model);
     }
     this.refs.filmForm.reset();
     // React complains if we update

@@ -19,7 +19,7 @@
   "author": "tomaash",
   "license": "MIT",
   "dependencies": {
-    "alt": "^0.16.5",
+    "alt": "^0.16.7",
     "autoprefixer-loader": "^1.2.0",
     "axios": "^0.5.4",
     "babel": "^5.4.7",

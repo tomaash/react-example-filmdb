@@ -1,10 +1,10 @@
-'use strict';
+import alt from 'utils/alt';
 import axios from 'axios';
-// import {defer} from 'lodash';
+import StatusActions from 'actions/status-actions';
 
-export default class StatusStore {
+class StatusStore {
   constructor() {
-    this.bindActions(this.alt.getActions('status'));
+    this.bindActions(StatusActions);
     this.busy = false;
     this.error = false;
   }
@@ -27,5 +27,7 @@ export default class StatusStore {
     this.alt.dispatch(this.retryData.action.symbol, data, this.retryData.action);
     this.alt.getActions('status').done();
   }
-
 }
+
+module.exports = (alt.createStore(StatusStore));
+

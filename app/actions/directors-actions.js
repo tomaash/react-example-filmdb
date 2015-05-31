@@ -1,9 +1,12 @@
-'use strict';
+import alt from 'utils/alt';
 import api from 'utils/api';
 import {clone} from 'lodash';
 import {networkAction} from 'utils/action-utils';
 
-export default class DirectorsActions {
+class DirectorsActions {
+  constructor() {
+    this.generateActions('removeCurrent');
+  }
   fetch() {
     networkAction(this, api.directors.getAll);
   }
@@ -20,3 +23,5 @@ export default class DirectorsActions {
     networkAction(this, api.directors.delete, id);
   }
 }
+
+module.exports = (alt.createActions(DirectorsActions));

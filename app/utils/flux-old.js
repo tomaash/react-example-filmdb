@@ -1,6 +1,6 @@
 'use strict';
 
-import Alt from 'alt';
+import alt from 'utils/alt';
 import AltResolver from './alt-resolver.js';
 
 import CarsActions from 'actions/cars';

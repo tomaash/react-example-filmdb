@@ -1,4 +1,4 @@
-'use strict';
+import alt from 'utils/alt';
 
 class StatusActions {
   constructor() {
@@ -6,4 +6,4 @@ class StatusActions {
   }
 }
 
-export default StatusActions;
+module.exports = (alt.createActions(StatusActions));
