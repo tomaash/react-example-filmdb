@@ -2,10 +2,6 @@
 
 export default {
   networkAction: async function(context, method, ...params) {
-    const loginState = context.alt.getStore('login').getState();
-    const token = loginState.user && loginState.user.token;
-    if (params.length < 1) params.push({});
-    if (token) params.push({'auth-token': token});
     const statusActions = context.alt.getActions('status');
     try {
       statusActions.started();

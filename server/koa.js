@@ -75,7 +75,6 @@ else {
 app.use(bodyParser());
 
 import User from './models/user';
-
 // Authenticate
 app.use(function *(next) {
   const token = this.req.headers['auth-token'];

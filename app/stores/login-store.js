@@ -1,5 +1,6 @@
 'use strict';
 import {defer} from 'lodash';
+import api from 'utils/api';
 // import {assign} from 'lodash';
 // import {findItemById, findIndexById} from 'utils/store-utils';
 
@@ -13,9 +14,11 @@ export default class LoginStore {
     if (data.ok) {
       this.user = data.user;
       this.error = null;
+      api.updateToken(this.user.token);
       defer(this.alt.router.transitionTo.bind(this, 'directors'));
     }
     else {
+      api.updateToken(null);
       this.user = null;
       this.error = data.error.message;
     }
@@ -29,6 +32,7 @@ export default class LoginStore {
   onLogout() {
     this.user = null;
     this.error = null;
+    api.updateToken(null);
     defer(this.alt.router.transitionTo.bind(this, 'login'));
   }
 }
