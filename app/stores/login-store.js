@@ -36,6 +36,8 @@ class LoginStore {
       user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
     } finally {
       if (user) {
+        console.log('loadLocalUser');
+        console.log(user);
         this.storeUser(user);
       }
     }

@@ -1,6 +1,3 @@
-import LoginActions from 'actions/login-actions';
-import LoginStore from 'stores/login-store';
-
 export default {
   changeHandler: function(target) {
     target.prototype.changeHandler = function(key, attr, event) {
@@ -13,8 +10,7 @@ export default {
   },
   authDecorator: function(target) {
     target.willTransitionTo = function(transition) {
-      console.log(transition);
-      if (!LoginStore.getState().user) {
+      if (!localStorage.filmdbUser) {
         transition.redirect('/login');
       }
     };

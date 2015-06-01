@@ -9,11 +9,12 @@ import Router from 'react-router';
 import reactMixin from 'react-mixin';
 import LoginActions from 'actions/login-actions';
 
-// First load logged user
-LoginActions.loadLocalUser();
-
 @reactMixin.decorate(Router.State)
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    LoginActions.loadLocalUser();
+  }
   render() {
     var navbar;
     if (this.getPathname() !== '/login') {
