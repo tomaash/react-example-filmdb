@@ -5,32 +5,24 @@ import {RouteHandler} from 'react-router';
 
 import Navbar from 'components/shared/navbar';
 import Footer from 'components/shared/footer';
-import StoreUtils from 'utils/store-utils';
+import Router from 'react-router';
+import reactMixin from 'react-mixin';
+import LoginActions from 'actions/login-actions';
 
+// First load logged user
+LoginActions.loadLocalUser();
+
+@reactMixin.decorate(Router.State)
 export default class App extends React.Component {
-  // static propTypes = {
-  //   flux: React.PropTypes.object.isRequired
-  // }
-  static contextTypes = {
-    router: React.PropTypes.func
-  }
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  componentWillMount() {
-    StoreUtils.routerObject = this.context.router;
-    // this.props.flux.router = this.context.router;
-  }
   render() {
     var navbar;
-    if (this.context.router.getCurrentPathname() !== '/loginfoo') {
-      navbar = <Navbar {...this.props}/>;
+    if (this.getPathname() !== '/login') {
+      navbar = <Navbar />;
     }
     return (
       <div className="container-fluid">
         {navbar}
-        <RouteHandler {...this.props}/>
+        <RouteHandler />
         <Footer />
       </div>
     );

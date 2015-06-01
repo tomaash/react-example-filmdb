@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class LoginActions {
   constructor() {
-    this.generateActions('logout');
+    this.generateActions('logout', 'loadLocalUser');
   }
   async login(data) {
     try {

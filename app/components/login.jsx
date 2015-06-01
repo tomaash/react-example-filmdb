@@ -17,8 +17,6 @@ export default class FilmProfile extends React.Component {
     this.state = {
       login: {}
     };
-    this.actions = LoginActions;
-    this.store = LoginStore;
   }
   static contextTypes = {
     router: React.PropTypes.func
@@ -38,10 +36,10 @@ export default class FilmProfile extends React.Component {
     };
   }
   register() {
-    this.actions.register(this.state.login);
+    LoginActions.register(this.state.login);
   }
   login() {
-    this.actions.login(this.state.login);
+    LoginActions.login(this.state.login);
   }
   render() {
     var error;

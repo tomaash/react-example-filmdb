@@ -4,10 +4,12 @@ import ActionBar from 'components/shared/action-bar';
 import {ModalTrigger, Button} from 'react-bootstrap';
 import moment from 'moment';
 import connectToStores from 'alt/utils/connectToStores';
+import {authDecorator} from 'utils/component-utils';
 
 import DirectorsStore from 'stores/directors-store';
 import DirectorsActions from 'actions/directors-actions';
 
+@authDecorator
 @connectToStores
 export default class DirectorsTable extends React.Component {
   static contextTypes = {
@@ -22,6 +24,9 @@ export default class DirectorsTable extends React.Component {
   }
   static getPropsFromStores(props) {
     return DirectorsStore.getState();
+  }
+  static willTransitionTo(transition) {
+    console.log(transition);
   }
   constructor(props) {
     super(props);

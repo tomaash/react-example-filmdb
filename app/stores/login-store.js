@@ -2,7 +2,10 @@ import alt from 'utils/alt';
 import {defer} from 'lodash';
 import api from 'utils/api';
 import LoginActions from 'actions/login-actions';
-import {routerObject} from 'utils/store-utils';
+// import {routerObject} from 'utils/store-utils';
+import router from 'router';
+
+const USER_STORAGE_KEY = 'filmdbUser';
 
 class LoginStore {
   constructor() {
@@ -12,16 +15,41 @@ class LoginStore {
   }
   saveUser(data) {
     if (data.ok) {
-      this.user = data.user;
-      this.error = null;
-      api.updateToken(this.user.token);
-      defer(routerObject.transitionTo.bind(this, 'directors'));
+      this.storeUser(data.user);
+      this.redirectToHome();
     }
     else {
-      api.updateToken(null);
-      this.user = null;
+      this.clearUser();
       this.error = data.error.message;
+      this.redirectToLogin();
     }
+  }
+  storeUser(user) {
+    this.user = user;
+    this.error = null;
+    api.updateToken(user.token);
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+  }
+  loadLocalUser() {
+    var user;
+    try {
+      user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
+    } finally {
+      if (user) {
+        this.storeUser(user);
+      }
+    }
+  }
+  clearUser() {
+    this.user = null;
+    api.updateToken(null);
+    localStorage.removeItem(USER_STORAGE_KEY);
+  }
+  redirectToHome() {
+    defer(router.transitionTo.bind(this, 'directors'));
+  }
+  redirectToLogin() {
+    defer(router.transitionTo.bind(this, 'login'));
   }
   onLogin(data) {
     this.saveUser.bind(this)(data);
@@ -30,10 +58,8 @@ class LoginStore {
     this.saveUser.bind(this)(data);
   }
   onLogout() {
-    this.user = null;
-    this.error = null;
-    api.updateToken(null);
-    defer(routerObject.transitionTo.bind(this, 'login'));
+    this.clearUser();
+    this.redirectToLogin();
   }
 }
 

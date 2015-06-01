@@ -9,6 +9,5 @@ export default {
       return x._id === id;
     });
     return index;
-  },
-  routerObject: {}
+  }
 };

@@ -2,13 +2,11 @@
 
 import Iso from 'iso';
 import React from 'react';
-import Router from 'react-router';
+import router from 'router';
 
 // Paths are relative to `app` directory
-// import alt from 'utils/alt';
 
 import alt from 'utils/alt';
-// import intlLoader from 'utils/intl-loader';
 
 if (process.env.NODE_ENV === 'development') {
   require('debug').enable('dev, koa');
@@ -45,17 +43,26 @@ const boostrap = () => {
   // load routes after int-polyfill
   // routes.jsx imports components using the `window.Intl`
   // it should be defined before
-  const routes = require('routes');
+  // const routes = require('routes');
 
   // Render the app at correct URL
-  Router.run(
-    routes,
-    Router.HistoryLocation,
+  // Router.run(
+  //   routes,
+  //   Router.HistoryLocation,
+  //   (Handler) => {
+  //     // , {flux}
+  //     const app = React.createElement(Handler);
+  //     // React.render(app, boot.container);
+  //     React.render(app, document.getElementById('content'));
+  //   }
+  // );
+
+  router.run(
     (Handler) => {
       // , {flux}
       const app = React.createElement(Handler);
       // React.render(app, boot.container);
       React.render(app, document.getElementById('content'));
-    }
-  );
+    });
+
 })();
