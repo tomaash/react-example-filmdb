@@ -52,7 +52,7 @@ export default function(app) {
       this.status = 201;
       this.body = yield user.save();
     } catch (err) {
-      this.status = 409;
+      this.status = 401;
       this.body = err;
     }
   });

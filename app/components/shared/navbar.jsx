@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import {NavItemLink} from 'react-router-bootstrap';
 import {Alert, Button} from 'react-bootstrap';
 
-import StatusStore from 'stores/directors-store';
+import StatusStore from 'stores/status-store';
 import StatusActions from 'actions/status-actions';
 import LoginActions from 'actions/login-actions';
 
@@ -25,7 +25,6 @@ export default class Navbar extends React.Component {
     StatusActions.retry();
   }
   logout() {
-    console.log('logout!');
     LoginActions.logout();
   }
   render() {
@@ -61,9 +60,6 @@ export default class Navbar extends React.Component {
               </li>
               <li>
                 <NavItemLink to='films'>Films</NavItemLink>
-              </li>
-              <li>
-                <NavItemLink to='login'>Login</NavItemLink>
               </li>
             </ul>
             <ul className="nav navbar-nav pull-right">

@@ -24,8 +24,8 @@ class StatusStore {
   async onRetry() {
     const response = await axios(this.retryData.config);
     var data = response.data;
-    this.alt.dispatch(this.retryData.action.symbol, data, this.retryData.action);
-    this.alt.getActions('status').done();
+    alt.dispatch(this.retryData.action.symbol, data, this.retryData.action);
+    StatusActions.done();
   }
 }
 

@@ -78,14 +78,16 @@ import User from './models/user';
 // Authenticate
 app.use(function *(next) {
   const token = this.req.headers['auth-token'];
-  var isApi = !!this.request.url.match(/^\/api/);
-  console.log('isapi');
-  console.log(isApi);
+  const isApi = !!this.request.url.match(/^\/api/);
   const user = token && (yield User.findOne({token}));
-  console.log('user');
-  console.log(user);
+  if (isApi && !user) {
+    this.status = 401;
+    this.body = '401 Unauthorized';
+    return;
+  }
   this.request.user = user;
   if (user) {
+    // Add user to get condition for API
     if (this.request.method === 'GET') {
       var conditions;
       var query = clone(this.request.query);
@@ -101,6 +103,7 @@ app.use(function *(next) {
       console.log('has query');
       console.log(this.request.query);
     }
+    // Add user to post data for API
     else if (this.request.body) {
       console.log('has body');
       this.request.body.user = user._id;
