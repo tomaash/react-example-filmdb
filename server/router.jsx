@@ -5,62 +5,36 @@ import path from 'path';
 import debug from 'debug';
 
 import Router from 'react-router';
+import React from 'react';
 
 // Paths are relative to `app` directory
 import routes from 'routes';
-// import Flux from 'utils/flux';
-import promisify from 'utils/promisify';
-// import Iso from 'iso';
-// import alt from 'alt';
+
+import Iso from 'iso';
+import alt from 'utils/alt';
 
 export default function *() {
   const isCashed = this.cashed ? yield *this.cashed() : false;
   if (!isCashed) {
-    const router = Router.create({
-      routes: routes,
-      location: this.request.url,
-      onAbort: (redirect) => {
-        // Allow transition with `willTransitionTo`
-        // to redirect request with `302` status code
-        debug('dev')('Redirect request to `%s`', redirect.to);
-        this.redirect(redirect.to);
-        return this.res.end();
-      },
-      onError: (error) => {
-        // Allow server to respond with 500
-        // when something went wrong with router
-        //
-        // TODO: Render `pages/server-error` in production?
-        debug('koa')('Routing Error');
-        debug('koa')(error);
-        this.throw(error);
-        return this.res.end();
-      }
-    });
 
-    // Init alt instance
-    // const flux = new Flux();
+    var getHandler = function(routes, url) {
+      return new Promise(function(resolve) {
+        Router.run(routes, url, function (Handler) {
+          resolve(Handler);
+        });
+      });
+    };
 
-    // Get request locale for rendering
-    // const locale = this.cookies.get('_lang') || this.acceptsLanguages(require('./config/init').locales) || 'en';
-    // const {messages} = require(`data/${locale}`);
+    // We seed our stores with data
+    alt.bootstrap(JSON.stringify({}));
+    var iso = new Iso();
 
-    // Populate store with locale
-    // flux
-    //   .getActions('locale')
-    //   .switchLocaleSuccess({locale, messages});
+    // We use react-router to run the URL that is provided in routes.jsx
+    const handler = yield getHandler(routes, this.request.url);
+    const node = React.renderToString(React.createElement(handler));
 
-    // debug('dev')(`locale of request: ${locale}`);
-
-    // TEMPORARY
-
-    // const handler = yield promisify(router.run);
-    // const content = yield flux.render(handler);
-
-    // Reload './webpack-stats.json' on dev
-    // cache it on production
-
-    var content = '';
+    iso.add(node, alt.flush());
+    var content = iso.render();
     let assets;
     if (process.env.NODE_ENV === 'development') {
       assets = fs.readFileSync(path.resolve(__dirname, './webpack-stats.json'));

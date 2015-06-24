@@ -31,6 +31,9 @@ class LoginStore {
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
   }
   loadLocalUser() {
+    if (!process.env.BROWSER) {
+      return;
+    }
     var user;
     try {
       user = JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
