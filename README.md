@@ -2,7 +2,8 @@
 
 > Complete application example including user authentication using koa on server side, and React/Flux(Alt) on frontend. Also uses koa-mongo-rest to generate REST API, and restful.js to consume them. With a healthy dose of Bootstrap, using react-bootstrap.
 
-**Demo:** https://isofilmdb.herokuapp.com
+**Demo:** https://react-example-filmdb.herokuapp.com
+
 
 ## Libraries Included
 
@@ -32,6 +33,8 @@ Build for production with `npm run build`.
 **Koa** will be our server for the server side rendering, we use **alt** for our Flux architecture and **react-router** for routing in our app.
 
 With **iso** as helper we can populate **alt** flux stores before the first rendering and have a complete async isomorphic React application.
+
+For a more comprehensive guide to the source code, see [wiki](https://github.com/tomaash/react-example-filmdb/wiki)
 
 ## Flux
 
