@@ -1,5 +1,5 @@
 {
-  "name": "isofilmdb",
+  "name": "react-example-filmdb",
   "version": "0.0.1",
   "description": "Isomorphic React + Flux film database example",
   "main": "server/index.js",
