@@ -34,7 +34,7 @@ Build for production with `npm run build`.
 
 With **iso** as helper we can populate **alt** flux stores before the first rendering and have a complete async isomorphic React application.
 
-For a more comprehensive guide to the source code, see [wiki](https://github.com/tomaash/react-example-filmdb/wiki)
+**For a more comprehensive guide to the source code, see [wiki](https://github.com/tomaash/react-example-filmdb/wiki)**
 
 ## Flux
 
