@@ -25,6 +25,8 @@ const boostrap = () => {
   if (process.env.BROWSER) {
     var chromeDebug = require('alt/utils/chromeDebug');
     chromeDebug(alt);
+    require('bootstrap/dist/css/bootstrap.min.css');
+    require('./styles/_main.scss');
   }
 
   // bootstrap application with data from server

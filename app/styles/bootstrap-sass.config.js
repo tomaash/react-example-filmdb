@@ -1,6 +1,7 @@
 module.exports = {
   // Use preBootstrapCustomizations to change $brand-primary. Ensure this preBootstrapCustomizations does not
   // depend on other bootstrap variables.
+
   preBootstrapCustomizations: 'app/styles/_pre-bootstrap-customizations.scss',
 
   // Use bootstrapCustomizations to utilize other sass variables defined in preBootstrapCustomizations or the

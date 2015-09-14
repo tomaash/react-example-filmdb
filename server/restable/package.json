@@ -1,0 +1,57 @@
+{
+  "name": "koa-mongo-rest",
+  "version": "0.3.4",
+  "description": "generate REST API with koa and mongo",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha --harmony"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/t3chnoboy/koa-mongo-rest.git"
+  },
+  "keywords": [
+    "koa",
+    "REST",
+    "API",
+    "mongo",
+    "mongodb",
+    "mongoose",
+    "es6",
+    "generators",
+    "database",
+    "db"
+  ],
+  "author": {
+    "name": "Dmitry Mazuro",
+    "email": "dmitry.mazuro@icloud.com"
+  },
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/t3chnoboy/koa-mongo-rest/issues"
+  },
+  "homepage": "https://github.com/t3chnoboy/koa-mongo-rest",
+  "dependencies": {
+    "koa-body-parser": "git://github.com/tomaash/koa-body-parser.git",
+    "mongoose": "^4.0.2",
+    "pluralize": "1.1.2"
+  },
+  "devDependencies": {
+    "co-mocha": "0.0.2",
+    "coffee-script": "git://github.com/xixixao/coffee-script.git",
+    "gulp": "^3.6.0",
+    "gulp-coffee-es6": "git://github.com/t3chnoboy/gulp-coffee-es6.git",
+    "gulp-nodemon": "^1.0.2",
+    "koa": "^0.5.2",
+    "koa-logger": "^1.2.0",
+    "koa-router": "^3.1.2",
+    "should": "^3.2.0-beta1",
+    "supertest": "^0.10.0"
+  },
+  "readme": "# Koa mongo REST [![NPM version](https://badge.fury.io/js/koa-mongo-rest.svg)](http://badge.fury.io/js/koa-mongo-rest) [![Dependency Status](https://gemnasium.com/t3chnoboy/koa-mongo-rest.svg)](https://gemnasium.com/t3chnoboy/koa-mongo-rest) [![Build Status](https://travis-ci.org/t3chnoboy/koa-mongo-rest.svg?branch=master)](https://travis-ci.org/t3chnoboy/koa-mongo-rest)\n\nEasy REST api for [koa](http://koajs.com) server  \n\n[![NPM](https://nodei.co/npm/koa-mongo-rest.png?downloads=true)](https://nodei.co/npm/koa-mongo-rest/)\n\n\n\n## Installation\nInstall using npm:\n```sh\nnpm install koa-mongo-rest\n```\n\n## Usage\n\nRequire library\n```javascript\ngenerateApi = require('koa-mongo-rest');\n```\n\nCreate mongoose model\n```javascript\nmongoUrl = '127.0.0.1:27017';\nmongoose = require('mongoose');\nmongoose.connect(mongoUrl);\n\nschema = new mongoose.Schema({\n  email: String,\n  name: String,\n  password: String,\n  address: String,\n  zipcode: Number,\n  lists: Array\n});\n\nmodel = mongoose.model('users', schema);\n```\n\nCreate server\n```javascript\nvar koa = require('koa');\nvar router = require('koa-router');\n\nvar app = koa();\n\n//router is required\napp.use(router(app));\n\n\n//add REST routes to your app. Prefix is optional\ngenerateApi(app, model, '/api');\n\napp.listen(process.env.PORT || 5000);\n```\n\nFollowing REST API is now created for you:\n\n| HTTP Verb     | /users   | /users/:id |\n| ------------- | ------------- | --------------- |\n| GET           | Get all documents, or documents that match the query. <br> You can use [mongoose find conditions] (http://mongoosejs.com/docs/queries.html), limit, skip and sort. <br> For example: <br> **/api/users?conditions={\"name\":\"john\"}&limit=10&skip=1&sort=-zipcode** | Get the addressed document. |\n| POST          | Create a new document and send it back. |  Update the addressed document with specified attributes. |\n| PUT           | Create a new document and send it back. | Replace the addressed document. |\n| DELETE        | n/a | Delete the addressed document. |\n| PATCH         | n/a | Update the addressed document with specified attributes. |\n",
+  "readmeFilename": "README.md",
+  "gitHead": "55724c658d6c1f294968637596924bd71f09e811",
+  "_id": "koa-mongo-rest@0.3.4",
+  "_shasum": "387174b012f50eccef4745c9c8edaae5ac9e7629",
+  "_from": "koa-mongo-rest@>=0.3.4 <0.4.0"
+}

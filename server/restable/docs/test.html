@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Koa mongo REST</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <style>
+      body {
+        font: 16px/1.6 "Helvetica Neue", arial, sans-serif;
+        padding: 60px;
+      }
+      pre { font-size: 14px; line-height: 1.3 }
+      code .init { color: #2F6FAD }
+      code .string { color: #5890AD }
+      code .keyword { color: #8A6343 }
+      code .number { color: #2F6FAD }
+    </style>
+    <script>
+      $(function(){
+        $('code').each(function(){
+          $(this).html(highlight($(this).text()));
+        });
+      });
+
+      function highlight(js) {
+        return js
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\/\/(.*)/gm, '<span class="comment">//$1</span>')
+          .replace(/('.*')/gm, '<span class="string">$1</span>')
+          .replace(/(\d+\.\d+)/gm, '<span class="number">$1</span>')
+          .replace(/(\d+)/gm, '<span class="number">$1</span>')
+          .replace(/\bnew *(\w+)/gm, '<span class="keyword">new</span> <span class="init">$1</span>')
+          .replace(/\b(function|new|throw|return|var|if|else)\b/gm, '<span class="keyword">$1</span>')
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Koa mongo REST</h1>
+    <p>Rest api generation for koa server.</p>
+    <section class="suite">
+      <h1>REST API</h1>
+      <dl>
+        <section class="suite">
+          <h1>Routes</h1>
+          <dl>
+            <section class="suite">
+              <h1>GET</h1>
+              <dl>
+                <section class="suite">
+                  <h1>GET /:model</h1>
+                  <dl>
+                    <dt>should respond with JSON for all records</dt>
+                    <dd><pre><code>return request.get('/user').expect(200).expect('Content-Type', /json/).expect(users).end(done);</code></pre></dd>
+                  </dl>
+                </section>
+                <section class="suite">
+                  <h1>GET /:model/:id</h1>
+                  <dl>
+                    <dt>should respond with JSON for the record with the specified id</dt>
+                    <dd><pre><code>return request.get('/user/2').expect(200).expect('Content-Type', /json/).expect({
+  name: 'Joff',
+  age: 27,
+  _id: 2
+}).end(done);</code></pre></dd>
+                  </dl>
+                </section>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>POST</h1>
+              <dl>
+                <section class="suite">
+                  <h1>POST /:model</h1>
+                  <dl>
+                    <dt>should respond with JSON for the created record</dt>
+                    <dd><pre><code>return request.post('/user').send({
+  name: 'James',
+  age: 40,
+  _id: 4
+}).expect(201).expect({
+  name: 'James',
+  age: 40,
+  _id: 4
+}).end(done);</code></pre></dd>
+                  </dl>
+                </section>
+                <section class="suite">
+                  <h1>POST /:model/:id</h1>
+                  <dl>
+                    <dt>should respond with JSON for the updated record</dt>
+                    <dd><pre><code>return request.post('/user/2').send({
+  age: 28
+}).expect(200).expect({
+  name: 'Joff',
+  age: 28,
+  _id: 2
+}).end(done);</code></pre></dd>
+                  </dl>
+                </section>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>DELETE</h1>
+              <dl>
+                <section class="suite">
+                  <h1>DELETE /:model/:id</h1>
+                  <dl>
+                    <dt>should respond with JSON for the destroyed record</dt>
+                    <dd><pre><code>return request.del('/user/2').expect(200).expect({
+  name: 'Joff',
+  age: 27,
+  _id: 2
+}).end(done);</code></pre></dd>
+                  </dl>
+                </section>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>PUT</h1>
+              <dl>
+                <section class="suite">
+                  <h1>PUT /:model</h1>
+                  <dl>
+                    <dt>should respond with JSON for the created record</dt>
+                    <dd><pre><code>return request.put('/user').send({
+  name: 'John',
+  age: 26,
+  _id: 5
+}).expect(201).expect({
+  name: 'John',
+  age: 26,
+  _id: 5
+}).end(done);</code></pre></dd>
+                  </dl>
+                </section>
+                <section class="suite">
+                  <h1>PUT /:model/:id</h1>
+                  <dl>
+                    <dt>should return JSON for the replaced record</dt>
+                    <dd><pre><code>return request.put('/user/2').send({
+  name: 'Joseph',
+  age: 37
+}).expect(200).expect({
+  name: 'Joseph',
+  age: 37,
+  _id: 2
+}).end(done);</code></pre></dd>
+                  </dl>
+                </section>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>PATCH</h1>
+              <dl>
+                <section class="suite">
+                  <h1>PATCH /:model/:id</h1>
+                  <dl>
+                    <dt>should respond with JSON for the updated record</dt>
+                    <dd><pre><code>return request.patch('/user/2').send({
+  age: 28
+}).expect(200).expect({
+  name: 'Joff',
+  age: 28,
+  _id: 2
+}).end(done);</code></pre></dd>
+                  </dl>
+                </section>
+              </dl>
+            </section>
+          </dl>
+        </section>
+      </dl>
+    </section>
+  </body>
+</html>

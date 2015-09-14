@@ -8,32 +8,38 @@
     "mocha": true
   },
   "rules": {
-    "quotes": [2, "single"],
-    "eol-last": [1],
+    "quotes": [0],
+    "eol-last": [0],
     "no-mixed-requires": [0],
     "no-underscore-dangle": [0],
-    "camelcase": 2,
-    "dot-notation": [2, {"allowSnakeCase": true}],
-    "curly": false,
-    "no-unused-expressions": false,
+    "camelcase": 1,
+    "curly": 0,
+    "no-unused-expressions": [1],
     "react/display-name": 0,
-    "react/jsx-boolean-value": 2,
-    "react/jsx-quotes": 2,
-    "react/jsx-no-undef": 2,
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/no-did-mount-set-state": 2,
-    "react/no-did-update-set-state": 2,
-    "react/no-multi-comp": 2,
-    "react/no-unknown-property": 2,
+    "react/jsx-boolean-value": 1,
+    "react/jsx-quotes": 1,
+    "react/jsx-no-undef": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-multi-comp": 1,
+    "react/no-unknown-property": 1,
     "react/prop-types": 1,
-    "react/react-in-jsx-scope": 2,
-    "react/self-closing-comp": 2,
-    "react/wrap-multilines": 2
+    "react/react-in-jsx-scope": 1,
+    "react/self-closing-comp": 1,
+    "react/wrap-multilines": 1
   },
   "ecmaFeatures": {
     "jsx": true,
     "modules": true,
     "blockBindings": true
+  },
+  "globals": {
+    "sinon": true,
+    "chai": true,
+    "assert": true,
+    "expect": true,
+    "should": true
   }
 }

@@ -19,7 +19,7 @@ module.exports = {
   entry: {
     app: [
       './app/index.js',
-      'bootstrap-sass!./app/styles/bootstrap-sass.prod.config.js'
+      // 'bootstrap-sass!./app/styles/bootstrap-sass.prod.config.js'
     ]
   },
   output: {
