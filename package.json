@@ -27,7 +27,7 @@
     "babel-eslint": "^3.1.23",
     "babel-istanbul": "^0.2.10",
     "babel-loader": "^5.3.1",
-    "bcrypt": "^0.8.3",
+    "bcryptjs": "^2.3.0",
     "blocked": "^1.1.0",
     "bootstrap": "^3.3.5",
     "browser-sync": "^2.7.13",

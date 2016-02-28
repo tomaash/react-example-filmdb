@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-// import bcrypt from 'bcrypt';
+// import bcrypt from 'bcryptjs';
 import jsonSelect from 'mongoose-json-select';
 
 // const SALT_WORK_FACTOR = 10;
